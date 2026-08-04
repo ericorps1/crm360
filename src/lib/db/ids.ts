@@ -14,6 +14,7 @@ const prefixes = {
   agentProfile: "agp",
   kbEntry: "kb",
   template: "tpl",
+  quickReply: "qr",
   testRun: "run",
   testCase: "case",
 } as const;

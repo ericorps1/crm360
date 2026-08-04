@@ -10,10 +10,12 @@ export function ContactAvatar({
   seed?: string;
   size?: "sm" | "md" | "lg";
 }) {
+  // Tamaños desde los tokens de densidad: el lg de 48px era lo que hacía que
+  // la fila de conversación midiera ~92px.
   const sizes = {
-    sm: "h-7 w-7 text-[10px]",
-    md: "h-9 w-9 text-xs",
-    lg: "h-12 w-12 text-sm",
+    sm: "h-[var(--avatar-sm)] w-[var(--avatar-sm)] text-2xs",
+    md: "h-[var(--avatar-md)] w-[var(--avatar-md)] text-2xs",
+    lg: "h-[var(--avatar-lg)] w-[var(--avatar-lg)] text-xs",
   } as const;
   return (
     <div

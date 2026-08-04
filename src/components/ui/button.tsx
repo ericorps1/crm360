@@ -2,7 +2,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  // gap-1.5 y el dimensionado automático de íconos evitan tener que poner
+  // "h-4 w-4" a mano en cada llamada, que es lo que se hacía antes.
+  "inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[15px] [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -17,10 +19,11 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-[var(--control-h)] px-3",
+        sm: "h-[var(--control-h-sm)] px-2 text-xs",
+        lg: "h-8 px-5",
+        icon: "h-[var(--control-h)] w-[var(--control-h)]",
+        "icon-sm": "h-[var(--control-h-sm)] w-[var(--control-h-sm)]",
       },
     },
     defaultVariants: {

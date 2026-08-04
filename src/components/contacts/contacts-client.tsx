@@ -43,7 +43,7 @@ export function ContactsClient() {
 
   return (
     <div className="flex h-full flex-col">
-      <header className="flex items-center justify-between gap-4 border-b px-6 py-4">
+      <header className="flex items-center justify-between gap-4 border-b px-4 py-2">
         <h2 className="font-semibold">Contactos</h2>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -67,7 +67,7 @@ export function ContactsClient() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-4">
         {contacts.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
             <p className="text-sm font-medium">Sin contactos</p>
@@ -162,7 +162,7 @@ function EditDialog({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-lg border bg-card p-5 shadow-xl"
+        className="w-full max-w-md rounded-lg border bg-card p-3 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="mb-4 font-semibold">Editar contacto</h3>

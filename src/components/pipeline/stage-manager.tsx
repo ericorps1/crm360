@@ -176,7 +176,7 @@ export function StageManager({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg rounded-lg border bg-card p-5 shadow-xl"
+        className="w-full max-w-lg rounded-lg border bg-card p-3 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="mb-4 font-semibold">Etapas del embudo</h3>

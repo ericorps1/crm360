@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, ChevronRight, Sparkles, UserRound } from "lucide-react";
 import type { ConversationDto, StageDto } from "@/lib/types";
 import { cn, formatPhone } from "@/lib/utils";
+import { toneClass } from "@/lib/stage-colors";
 import { ContactAvatar } from "@/components/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -121,7 +122,7 @@ export function ContactPanel({
   return (
     <div className="flex h-full flex-col">
       <header className="sticky top-0 flex items-center justify-between border-b bg-background px-4 py-3">
-        <h3 className="text-[13px] font-[650] uppercase tracking-wide text-text-2">
+        <h3 className="text-md font-[650] uppercase tracking-wide text-text-2">
           Detalles
         </h3>
         <button
@@ -154,7 +155,7 @@ export function ContactPanel({
 
           {conversation.handoffAt && (
             <div className="mt-3 rounded-md border border-warning-line bg-warning-surface p-3">
-              <p className="flex items-center gap-1.5 text-[13px] font-medium text-warning-ink">
+              <p className="flex items-center gap-1.5 text-md font-medium text-warning-ink">
                 <UserRound className="h-4 w-4" strokeWidth={1.7} /> Atención humana
               </p>
               <p className="mt-1 text-xs text-warning-ink/80">
@@ -175,8 +176,8 @@ export function ContactPanel({
           <div className="mt-3 rounded-md border bg-secondary/50 px-3 py-2.5">
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <p className="text-[13px] font-medium">IA en esta conversación</p>
-                <p className="text-[11px] text-text-3">
+                <p className="text-md font-medium">IA en esta conversación</p>
+                <p className="text-xs text-text-3">
                   {conversation.handoffAt
                     ? "En pausa · atención humana"
                     : !conversation.aiEnabled
@@ -215,7 +216,7 @@ export function ContactPanel({
                   className="mt-0.5 h-3.5 w-3.5 shrink-0 text-warning-ink"
                   strokeWidth={1.7}
                 />
-                <p className="text-[11px] leading-relaxed text-warning-ink">
+                <p className="text-xs leading-relaxed text-warning-ink">
                   {aiConfigured
                     ? "El agente de CRM360 no responde por su cuenta. Configura lo básico y enciéndelo (o conecta tu propio bot por la API)."
                     : "Falta la clave de IA de la instancia (OPENROUTER_API_TOKEN) para que el agente responda, o conecta tu propio bot por la API."}
@@ -236,7 +237,7 @@ export function ContactPanel({
         {/* Stepper de etapa */}
         {stages.length > 0 && leadId && (
           <section className="border-b p-4">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-text-3">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-3">
               Etapa del embudo
             </p>
             <ol>
@@ -267,12 +268,19 @@ export function ContactPanel({
                     </button>
                     <button
                       onClick={() => void moveToStage(s.id)}
-                      className={cn(
-                        "text-left text-[13px]",
-                        current ? "font-[650] text-brand-text" : "text-text-2 hover:text-foreground"
-                      )}
+                      className="min-w-0 text-left text-md"
                     >
-                      {s.name}
+                      {/* Solo la etapa actual lleva badge: marca dónde está el
+                          lead. Badgear todas convertiría el stepper en ruido. */}
+                      {current ? (
+                        <span className={cn("badge-etapa", toneClass(s.tone))}>
+                          {s.name}
+                        </span>
+                      ) : (
+                        <span className="text-text-2 hover:text-foreground">
+                          {s.name}
+                        </span>
+                      )}
                     </button>
                   </li>
                 );
@@ -283,7 +291,7 @@ export function ContactPanel({
 
         {/* Notas */}
         <section className="p-4">
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-text-3">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-3">
             Notas
           </p>
           <Textarea

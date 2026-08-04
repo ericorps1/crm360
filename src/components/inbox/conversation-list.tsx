@@ -24,7 +24,7 @@ function EmptyState({ onSeeded }: { onSeeded: () => void }) {
   }
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-4 text-center">
       <p className="text-sm font-medium">Sin conversaciones todavía</p>
       <p className="text-xs text-text-3">
         Cuando alguien escriba a tu número de WhatsApp, su conversación
@@ -76,9 +76,9 @@ export function ConversationList({
 
   return (
     <div className="flex h-full flex-col">
-      <header className="border-b px-4 pb-3 pt-4">
+      <header className="border-b px-3 pb-2 pt-3">
         <div className="mb-3 flex items-baseline gap-2">
-          <h2 className="text-[17px] font-[650] tracking-tight">Bandeja</h2>
+          <h2 className="text-xl font-[650] tracking-tight">Bandeja</h2>
           <span className="text-sm text-text-3">{conversations.length}</span>
         </div>
         <div className="flex items-center gap-2 rounded-md border bg-secondary px-3 py-[7px] transition-colors focus-within:border-brand focus-within:bg-background focus-within:ring-[3px] focus-within:ring-brand-soft">
@@ -87,12 +87,12 @@ export function ConversationList({
             placeholder="Buscar conversación…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent text-[13px] outline-none placeholder:text-text-3"
+            className="w-full bg-transparent text-md outline-none placeholder:text-text-3"
           />
         </div>
       </header>
 
-      <div className="flex gap-1.5 border-b px-4 py-2.5">
+      <div className="flex gap-1 border-b px-3 py-1.5">
         {(
           [
             { id: "all", label: "Todas", count: searched.length },
@@ -103,7 +103,7 @@ export function ConversationList({
             key={f.id}
             onClick={() => setFilter(f.id)}
             className={cn(
-              "flex items-center gap-1.5 rounded-full border px-3 py-[5px] text-[12.5px] font-medium transition-colors",
+              "flex items-center gap-1.5 rounded-full border px-3 py-[5px] text-sm font-medium transition-colors",
               filter === f.id
                 ? "border-brand bg-brand text-white"
                 : "bg-background text-text-2 hover:bg-accent"
@@ -112,7 +112,7 @@ export function ConversationList({
             {f.label}
             <span
               className={cn(
-                "rounded-full px-1.5 text-[11px]",
+                "rounded-full px-1.5 text-xs",
                 filter === f.id ? "bg-white/20" : "bg-secondary text-text-3"
               )}
             >
@@ -124,11 +124,11 @@ export function ConversationList({
 
       <div className="flex-1 overflow-y-auto">
         {loading ? (
-          <p className="p-6 text-center text-xs text-text-3">Cargando…</p>
+          <p className="p-4 text-center text-xs text-text-3">Cargando…</p>
         ) : conversations.length === 0 ? (
           <EmptyState onSeeded={onSeeded} />
         ) : visible.length === 0 ? (
-          <p className="p-6 text-center text-xs text-text-3">
+          <p className="p-4 text-center text-xs text-text-3">
             Sin resultados para este filtro.
           </p>
         ) : (
@@ -144,14 +144,14 @@ export function ConversationList({
                   <button
                     onClick={() => onSelect(c.id)}
                     className={cn(
-                      "flex w-full items-start gap-[11px] px-4 py-[var(--row-py)] text-left transition-colors",
+                      "flex w-full items-start gap-2 px-3 py-[var(--row-py)] text-left transition-colors",
                       active ? "bg-[var(--bg-active)]" : "hover:bg-subtle"
                     )}
                   >
                     <span className="relative shrink-0">
                       <ContactAvatar name={c.contact.name} seed={c.contact.id} size="lg" />
                       {c.windowOpen && (
-                        <span className="absolute bottom-0 right-0 h-[11px] w-[11px] rounded-full border-[2.5px] border-background bg-success" />
+                        <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-2 border-background bg-success" />
                       )}
                     </span>
                     <span className="min-w-0 flex-1">
@@ -166,7 +166,7 @@ export function ConversationList({
                         </span>
                         <span
                           className={cn(
-                            "shrink-0 text-[11.5px]",
+                            "shrink-0 text-xs",
                             unread ? "font-semibold text-brand" : "text-text-3"
                           )}
                         >
@@ -176,14 +176,14 @@ export function ConversationList({
                       <span className="mt-0.5 flex items-center justify-between gap-2">
                         <span
                           className={cn(
-                            "truncate text-[13px]",
+                            "truncate text-md",
                             unread ? "font-medium text-text-2" : "text-text-3"
                           )}
                         >
                           {previewText(c.preview)}
                         </span>
                         {unread && (
-                          <span className="flex h-[18px] min-w-[18px] shrink-0 items-center justify-center rounded-full bg-brand px-1.5 text-[10.5px] font-semibold text-white">
+                          <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-[3px] bg-brand px-1 text-2xs font-semibold text-white">
                             {c.unreadCount}
                           </span>
                         )}
@@ -195,7 +195,7 @@ export function ConversationList({
                           </span>
                         )}
                         {c.handoffAt && (
-                          <span className="inline-flex items-center gap-1 rounded-full border border-warning-line bg-warning-surface px-2 py-0.5 text-[11px] text-warning-ink">
+                          <span className="inline-flex items-center gap-1 rounded-full border border-warning-line bg-warning-surface px-2 py-0.5 text-xs text-warning-ink">
                             <UserRound className="h-3 w-3" strokeWidth={1.7} />
                             Atención humana
                           </span>

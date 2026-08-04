@@ -164,7 +164,7 @@ export function LabClient() {
         </div>
       )}
 
-      <div className="grid gap-6 p-6 lg:grid-cols-[280px_1fr]">
+      <div className="grid gap-6 p-4 lg:grid-cols-[280px_1fr]">
         <HistoryList
           runs={runs}
           selectedRunId={selectedRunId}
@@ -196,7 +196,7 @@ function Header({
   disabled: boolean;
 }) {
   return (
-    <header className="flex items-center justify-between border-b px-6 py-4">
+    <header className="flex items-center justify-between border-b px-4 py-2">
       <div>
         <h2 className="flex items-center gap-2 font-semibold">
           <FlaskConical className="h-4 w-4 text-primary" /> Laboratorio
@@ -256,7 +256,7 @@ function HistoryList({
               </span>
             )}
           </div>
-          <p className="mt-1 text-[11px] text-muted-foreground">
+          <p className="mt-1 text-xs text-muted-foreground">
             {new Date(run.startedAt).toLocaleString("es-MX", {
               day: "numeric",
               month: "short",

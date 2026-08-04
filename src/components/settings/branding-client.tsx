@@ -28,7 +28,7 @@ function Muestra({
       />
       <span className="min-w-0">
         <span className="block text-sm font-medium">{nombre}</span>
-        <span className="block text-[11px] text-text-3">{papel}</span>
+        <span className="block text-xs text-text-3">{papel}</span>
       </span>
     </div>
   );
@@ -61,18 +61,18 @@ export function BrandingClient() {
 
           {/* Vista previa con tokens vivos: cambia sola con el modo oscuro. */}
           <div className="rounded-md border bg-subtle p-4">
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2">
               <span
-                className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-sm text-[15px] font-bold text-white"
+                className="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-sm text-lg font-bold text-white"
                 style={{ background: "var(--accent)" }}
               >
                 {APP_NAME.charAt(0)}
               </span>
               <span className="min-w-0">
-                <span className="block text-[15px] font-[650] leading-tight">
+                <span className="block text-lg font-[650] leading-tight">
                   {APP_NAME}
                 </span>
-                <span className="block text-[11px] text-text-3">CRM · WhatsApp</span>
+                <span className="block text-xs text-text-3">CRM · WhatsApp</span>
               </span>
               <span className="flex-1" />
               <span
@@ -92,7 +92,7 @@ export function BrandingClient() {
                 Secundario
               </span>
             </div>
-            <p className="mt-2.5 text-[11px] text-text-3">
+            <p className="mt-2.5 text-xs text-text-3">
               Cambia el tema claro/oscuro desde la barra lateral para ver cómo se
               adaptan.
             </p>

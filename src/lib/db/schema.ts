@@ -306,6 +306,33 @@ export const kbEntry = pgTable(
   (t) => [index("kb_org_idx").on(t.organizationId)]
 );
 
+/**
+ * Respuestas rápidas internas: fragmentos de texto libre que el agente inserta
+ * con `#` mientras escribe. NO son plantillas de Meta (esas viven en `template`,
+ * requieren aprobación y usan variables posicionales `{{1}}`). Estas son de la
+ * organización, se editan sin pedirle permiso a nadie y usan variables con
+ * nombre: {{nombre}}, {{telefono}}, {{etapa}}.
+ */
+export const quickReply = pgTable(
+  "quick_reply",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organization.id, { onDelete: "cascade" }),
+    /** Lo que se teclea después de `#`. Normalizado a [a-z0-9-]. */
+    shortcut: text("shortcut").notNull(),
+    body: text("body").notNull(),
+    /** Ordena el menú por lo más usado, para no leer toda la lista cada vez. */
+    usageCount: integer("usage_count").notNull().default(0),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("quick_reply_org_shortcut_uq").on(t.organizationId, t.shortcut),
+  ]
+);
+
 export const template = pgTable(
   "template",
   {

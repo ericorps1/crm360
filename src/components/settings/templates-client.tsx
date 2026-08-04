@@ -98,7 +98,7 @@ export function TemplatesClient() {
           </div>
         ))}
         {templates.length === 0 && (
-          <p className="rounded-lg border border-dashed p-6 text-center text-sm text-muted-foreground">
+          <p className="rounded-lg border border-dashed p-4 text-center text-sm text-muted-foreground">
             Sin plantillas todavía. Crea la primera arriba — por ejemplo un
             «seguimos disponibles, ¿retomamos tu cotización?» para
             conversaciones frías.

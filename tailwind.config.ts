@@ -77,6 +77,20 @@ const config: Config = {
           ink: "var(--danger-ink)",
         },
       },
+      /**
+       * Escala tipográfica cerrada. Antes había 13 tamaños distintos, 8 de ellos
+       * arbitrarios en px y escritos inline (text-[10.5px], text-[12.5px]…).
+       * Estos seis cubren todos los casos; si hace falta uno nuevo, se agrega
+       * aquí y no en un componente.
+       */
+      fontSize: {
+        "2xs": ["10px", { lineHeight: "14px" }], // contadores, timestamps
+        xs: ["11px", { lineHeight: "15px" }], // metadata, badges, subtítulos
+        sm: ["12px", { lineHeight: "16px" }], // ← texto base de la app
+        md: ["13px", { lineHeight: "18px" }], // nombres, burbujas de chat
+        lg: ["15px", { lineHeight: "20px" }], // títulos de pantalla
+        xl: ["17px", { lineHeight: "22px" }], // único título grande
+      },
       borderRadius: {
         sm: "var(--radius-sm)",
         md: "var(--radius)",

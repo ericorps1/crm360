@@ -68,7 +68,7 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
           <div key={m.id}>
             {newDay && (
               <div className="my-3 flex justify-center">
-                <span className="rounded-full border bg-background px-3 py-1 text-[11.5px] font-semibold text-text-2 shadow-sm">
+                <span className="rounded-full border bg-background px-3 py-1 text-xs font-semibold text-text-2 shadow-sm">
                   {dayLabel(m.createdAt)}
                 </span>
               </div>
@@ -103,13 +103,13 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
                 <span className="float-right ml-2 mt-1 flex items-center gap-1">
                   {m.aiGenerated && (
                     <span
-                      className="inline-flex items-center gap-0.5 text-[10px] font-medium text-brand"
+                      className="inline-flex items-center gap-0.5 text-2xs font-medium text-brand"
                       title="Respuesta generada por IA"
                     >
                       <Sparkles className="h-3 w-3" strokeWidth={1.7} /> IA
                     </span>
                   )}
-                  <span className="text-[10.5px] text-text-4">
+                  <span className="text-2xs text-text-4">
                     {bubbleTime(m.createdAt)}
                   </span>
                   {out && <StatusTicks status={m.status} />}
