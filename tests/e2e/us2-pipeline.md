@@ -4,8 +4,14 @@
 > interno. Continúa el estado del guion de US1 (contactos ya creados por
 > mensajes entrantes).
 >
-> El embudo dejó de ser un kanban de columnas: ahora es **vista dividida**
-> (pestañas de etapa · columna de leads · conversación · panel del contacto).
+> El embudo tiene dos vistas conmutables (preferencia en
+> `localStorage["crm360.pipeline.view"]`):
+>   · **Tablero** (por defecto) — kanban de columnas con arrastre entre ellas.
+>   · **Conversación** — una etapa a la vez con el hilo de WhatsApp integrado.
+> Hacer clic en una tarjeta del tablero abre su conversación en la otra vista.
+>
+> Pasos 2 y 6: en la vista Tablero. Pasos 3-5 y 7-12: en la vista Conversación
+> (el arrastre ahí se suelta sobre la pestaña de etapa, no sobre una columna).
 
 ## Auto-registro (FR-010)
 
