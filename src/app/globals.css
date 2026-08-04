@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Sistema de diseño "Atlas": modo claro sobrio, morado como acento y
+  turquesa tenue como color de apoyo (burbujas del chat y estado de éxito).
+  Los neutros van sesgados al violeta para que el conjunto se lea como un
+  sistema y no como grises genéricos con un acento encima.
+  Los tokens de acento (--accent*) se sobreescriben en runtime por el
+  white-label de la organización (Configuración → Marca).
+*/
+@layer base {
+  :root {
+    /* ── Neutros claros: gris cálido-neutro, sin sesgo de color ───── */
+    --bg: #ffffff;
+    --bg-subtle: #fafafa;
+    --bg-panel: #f5f5f6;
+    --bg-hover: #f0f0f1;
+    --text: #171718;
+    --text-2: #55555c;
+    --text-3: #86868f;
+    --text-4: #adadb5;
+    --border: #eaeaec;
+    --border-strong: #dcdce0;
+
+    /* ── Marca: violeta primario + turquesa tenue secundario ─────── */
+    --accent: #6250b5;
+    --accent-hover: #52429b;
+    --accent-soft: #e4e0f5;
+    --accent-tint: #f6f4fc;
+    --accent-text: #4b3d8f;
+    --bg-active: var(--accent-tint);
+
+    --accent2: #2a817a;
+    --accent2-hover: #226b65;
+    --accent2-soft: #dbeceb;
+    --accent2-tint: #f1f8f7;
+    --accent2-text: #22635e;
+
+    /* Chat: la burbuja propia toma el turquesa tenue */
+    --chat-bg: #f6f6f7;
+    --bubble-out: #dbeceb;
+    --bubble-out-text: #1d5a55;
+
+    /* Avatares: neutros, nunca de color (gris en claro, negro en oscuro) */
+    --avatar-bg: #6c6c75;
+    --avatar-fg: #ffffff;
+    --avatar-ring: transparent;
+
+    /* Estado */
+    --success: #3b948c;
+    --warning: #b0803c;
+    --danger: #a94a50;
+    --success-surface: #eef6f2;
+    --success-line: #d5e7de;
+    --success-ink: #35664f;
+    --warning-surface: #faf6ee;
+    --warning-line: #ebe0cb;
+    --warning-ink: #85683a;
+    --danger-surface: #faf0f0;
+    --danger-line: #ecd2d2;
+    --danger-ink: #9d4a4a;
+
+    --radius-sm: 7px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 2px rgba(15, 15, 20, 0.05);
+    --shadow-md: 0 6px 20px -6px rgba(15, 15, 20, 0.13);
+    --shadow-pop: 0 12px 32px -8px rgba(15, 15, 20, 0.22);
+
+    --row-py: 11px;
+  }
+
+  /*
+    ── Modo oscuro: negro elegante por capas ──────────────────────────
+    No es gris oscuro genérico. El lienzo es casi negro puro y cada nivel
+    de elevación sube un escalón corto y medido (#0a → #101 → #16 → #1e),
+    de modo que paneles, tarjetas y hovers se distinguen por profundidad
+    y no por bordes duros. Los neutros son verdaderamente neutros: el
+    color solo aparece en la marca.
+  */
+  :root[data-theme="dark"] {
+    --bg: #0a0a0c;
+    --bg-subtle: #101013;
+    --bg-panel: #16161a;
+    --bg-hover: #1e1e23;
+    --text: #f4f4f6;
+    --text-2: #a8a8b2;
+    --text-3: #7a7a85;
+    --text-4: #56565f;
+    --border: #202026;
+    --border-strong: #2e2e36;
+
+    --accent: #8d7fc9;
+    --accent-hover: #a294d6;
+    --accent-soft: #241f33;
+    --accent-tint: #17151d;
+    --accent-text: #b3a7de;
+
+    --accent2: #4fa39c;
+    --accent2-hover: #62b4ad;
+    --accent2-soft: #14262a;
+    --accent2-tint: #101a1d;
+    --accent2-text: #78c2bb;
+
+    --chat-bg: #0d0d10;
+    --bubble-out: #16302f;
+    --bubble-out-text: #a9d8d3;
+
+    --avatar-bg: #1c1c21;
+    --avatar-fg: #d2d2da;
+    --avatar-ring: #2e2e36;
+
+    --success: #55b3a8;
+    --warning: #cfa257;
+    --danger: #d1706f;
+    --success-surface: #10221e;
+    --success-line: #1e3833;
+    --success-ink: #74c4b5;
+    --warning-surface: #221c11;
+    --warning-line: #3b311e;
+    --warning-ink: #d3ac6d;
+    --danger-surface: #241414;
+    --danger-line: #3f2525;
+    --danger-ink: #dd8f8e;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+    --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.75);
+    --shadow-pop: 0 16px 40px -10px rgba(0, 0, 0, 0.85);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0a0c;
+      --bg-subtle: #101013;
+      --bg-panel: #16161a;
+      --bg-hover: #1e1e23;
+      --text: #f4f4f6;
+      --text-2: #a8a8b2;
+      --text-3: #7a7a85;
+      --text-4: #56565f;
+      --border: #202026;
+      --border-strong: #2e2e36;
+
+      --accent: #8d7fc9;
+      --accent-hover: #a294d6;
+      --accent-soft: #241f33;
+      --accent-tint: #17151d;
+      --accent-text: #b3a7de;
+
+      --accent2: #4fa39c;
+      --accent2-hover: #62b4ad;
+      --accent2-soft: #14262a;
+      --accent2-tint: #101a1d;
+      --accent2-text: #78c2bb;
+
+      --chat-bg: #0d0d10;
+      --bubble-out: #16302f;
+      --bubble-out-text: #a9d8d3;
+
+      --avatar-bg: #1c1c21;
+      --avatar-fg: #d2d2da;
+      --avatar-ring: #2e2e36;
+
+      --success: #55b3a8;
+      --warning: #cfa257;
+      --danger: #d1706f;
+      --success-surface: #10221e;
+      --success-line: #1e3833;
+      --success-ink: #74c4b5;
+      --warning-surface: #221c11;
+      --warning-line: #3b311e;
+      --warning-ink: #d3ac6d;
+      --danger-surface: #241414;
+      --danger-line: #3f2525;
+      --danger-ink: #dd8f8e;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+      --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.75);
+      --shadow-pop: 0 16px 40px -10px rgba(0, 0, 0, 0.85);
+    }
+  }
+}
+
+/*
+  Badges de estatus del embudo.
+
+  Rectangulares a propósito: esquina de 2px, no píldora. En una lista densa el
+  rectángulo se alinea con el texto y ocupa menos espacio visual que un óvalo.
+
+  El color va atado al SIGNIFICADO de la etapa, no al gusto: el avance por el
+  embudo se lee de frío a cálido a verde, y las anclas (ganado / perdido) tienen
+  color fijo. Todos los tonos son apagados para no competir con la marca.
+*/
+@layer components {
+  .tono-violeta { --tono-surface: #efecf9; --tono-line: #d5cdee; --tono-ink: #55439a; }
+  .tono-turquesa { --tono-surface: #e6f2f1; --tono-line: #b6d8d4; --tono-ink: #226762; }
+  .tono-azul { --tono-surface: #eaf0f8; --tono-line: #c2d3e9; --tono-ink: #2f5680; }
+  .tono-verde { --tono-surface: #ecf4ee; --tono-line: #c1dbc9; --tono-ink: #2f6444; }
+  .tono-ambar { --tono-surface: #f9f4e9; --tono-line: #e6d6b3; --tono-ink: #7a5e2c; }
+  .tono-rosa { --tono-surface: #f9ecf0; --tono-line: #e9c6d1; --tono-ink: #8a4159; }
+  .tono-arena { --tono-surface: #f4f0e9; --tono-line: #dcd2c0; --tono-ink: #6d5c42; }
+  .tono-gris { --tono-surface: #f0f0f1; --tono-line: #d9d9dd; --tono-ink: #4f4f57; }
+
+  :root[data-theme="dark"] .tono-violeta { --tono-surface: #1c1826; --tono-line: #2f2843; --tono-ink: #a698d8; }
+  :root[data-theme="dark"] .tono-turquesa { --tono-surface: #10201f; --tono-line: #1d3634; --tono-ink: #6dbab3; }
+  :root[data-theme="dark"] .tono-azul { --tono-surface: #121a26; --tono-line: #1f2c3f; --tono-ink: #82a8d6; }
+  :root[data-theme="dark"] .tono-verde { --tono-surface: #111f16; --tono-line: #1e3527; --tono-ink: #76b78d; }
+  :root[data-theme="dark"] .tono-ambar { --tono-surface: #211b11; --tono-line: #382e1c; --tono-ink: #c8a468; }
+  :root[data-theme="dark"] .tono-rosa { --tono-surface: #22151a; --tono-line: #3a242c; --tono-ink: #d195aa; }
+  :root[data-theme="dark"] .tono-arena { --tono-surface: #1e1a13; --tono-line: #332c20; --tono-ink: #c0ab8a; }
+  :root[data-theme="dark"] .tono-gris { --tono-surface: #1a1a1e; --tono-line: #2b2b32; --tono-ink: #9c9ca6; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .tono-violeta { --tono-surface: #1c1826; --tono-line: #2f2843; --tono-ink: #a698d8; }
+    :root:not([data-theme="light"]) .tono-turquesa { --tono-surface: #10201f; --tono-line: #1d3634; --tono-ink: #6dbab3; }
+    :root:not([data-theme="light"]) .tono-azul { --tono-surface: #121a26; --tono-line: #1f2c3f; --tono-ink: #82a8d6; }
+    :root:not([data-theme="light"]) .tono-verde { --tono-surface: #111f16; --tono-line: #1e3527; --tono-ink: #76b78d; }
+    :root:not([data-theme="light"]) .tono-ambar { --tono-surface: #211b11; --tono-line: #382e1c; --tono-ink: #c8a468; }
+    :root:not([data-theme="light"]) .tono-rosa { --tono-surface: #22151a; --tono-line: #3a242c; --tono-ink: #d195aa; }
+    :root:not([data-theme="light"]) .tono-arena { --tono-surface: #1e1a13; --tono-line: #332c20; --tono-ink: #c0ab8a; }
+    :root:not([data-theme="light"]) .tono-gris { --tono-surface: #1a1a1e; --tono-line: #2b2b32; --tono-ink: #9c9ca6; }
+  }
+
+  /* Badge rectangular de estatus. */
+  .badge-etapa {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 2px;
+    border: 1px solid var(--tono-line);
+    background: var(--tono-surface);
+    color: var(--tono-ink);
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .badge-etapa::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 1px;
+    background: var(--tono-ink);
+  }
+  /* Variante sin punto, para cuando el badge ya está junto a otro indicador. */
+  .badge-etapa.sin-punto::before { display: none; }
+
+  /* Marca rectangular suelta, para listas densas. */
+  .cuadro-etapa {
+    display: inline-block;
+    width: 3px;
+    height: 12px;
+    border-radius: 1px;
+    background: var(--tono-ink);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    letter-spacing: -0.01em;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: var(--border-strong);
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

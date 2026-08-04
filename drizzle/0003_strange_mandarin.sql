@@ -1,0 +1,1 @@
+ALTER TABLE "pipeline_stage" ALTER COLUMN "tone" SET DEFAULT 'gris';

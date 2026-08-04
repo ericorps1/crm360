@@ -1,0 +1,1 @@
+ALTER TABLE "pipeline_stage" ADD COLUMN "tone" text DEFAULT 'niebla' NOT NULL;
