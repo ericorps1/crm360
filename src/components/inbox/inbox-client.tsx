@@ -100,7 +100,7 @@ export function InboxClient() {
 
   return (
     <div className="flex h-full">
-      <section className="w-[280px] shrink-0 overflow-hidden border-r">
+      <section className="w-[280px] shrink-0 overflow-hidden border-r bg-subtle">
         <ConversationList
           conversations={ws.conversations}
           selectedId={selectedId}

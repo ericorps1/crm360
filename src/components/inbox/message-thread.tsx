@@ -68,7 +68,7 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
           <div key={m.id}>
             {newDay && (
               <div className="my-3 flex justify-center">
-                <span className="rounded-[3px] border bg-background px-2 py-0.5 text-2xs font-semibold text-text-2 shadow-sm">
+                <span className="rounded-full bg-background px-2.5 py-0.5 text-2xs font-semibold text-text-3 shadow-sm">
                   {dayLabel(m.createdAt)}
                 </span>
               </div>
@@ -82,11 +82,13 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
             >
               <div
                 className={cn(
-                  "max-w-[70%] rounded-md px-2.5 pb-1 pt-1.5 text-sm leading-[1.4] shadow-sm",
+                  "max-w-[68%] rounded-2xl px-3 pb-1.5 pt-2 text-sm leading-[1.45] shadow-sm",
                   out
-                    ? "border border-brand-soft bg-bubble-out text-bubble-out-text"
-                    : "bg-background",
-                  !grouped && (out ? "rounded-tr-[5px]" : "rounded-tl-[5px]")
+                    ? "bg-bubble-out text-bubble-out-text"
+                    : "bg-background text-foreground",
+                  // La esquina del lado del emisor se cierra solo en el primer
+                  // mensaje del grupo: así el bloque se lee como una unidad.
+                  !grouped && (out ? "rounded-br-md" : "rounded-bl-md")
                 )}
               >
                 {m.type === "text" || m.type === "template" ? (

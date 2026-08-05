@@ -137,15 +137,14 @@ export function ConversationList({
               const unread = c.unreadCount > 0;
               const active = selectedId === c.id;
               return (
-                <li key={c.id} className="relative border-b border-border/70">
-                  {active && (
-                    <span className="absolute inset-y-0 left-0 w-[3px] bg-brand" />
-                  )}
+                <li key={c.id} className="relative px-1.5 py-px">
                   <button
                     onClick={() => onSelect(c.id)}
                     className={cn(
-                      "flex w-full items-center gap-2 px-2.5 py-1.5 text-left transition-colors",
-                      active ? "bg-[var(--bg-active)]" : "hover:bg-subtle"
+                      "flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left transition-colors",
+                      active
+                        ? "bg-brand-tint ring-1 ring-brand-soft"
+                        : "hover:bg-accent"
                     )}
                   >
                     <span className="relative shrink-0">

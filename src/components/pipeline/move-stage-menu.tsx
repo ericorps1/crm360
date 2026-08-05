@@ -50,7 +50,7 @@ export function MoveStageMenu({
           <div className="fixed inset-0 z-20" onClick={() => setOpen(false)} />
           <ul
             role="listbox"
-            className="absolute right-0 top-6 z-30 max-h-[280px] w-48 overflow-y-auto rounded-md border bg-card p-1 shadow-pop"
+            className="absolute right-0 top-[22px] z-30 max-h-[300px] w-[210px] overflow-y-auto rounded-lg border bg-card p-1 shadow-pop"
           >
             {stages.map((s) => {
               const activa = s.id === currentStageId;
@@ -64,18 +64,21 @@ export function MoveStageMenu({
                       if (!activa) onMove(s.id);
                       setOpen(false);
                     }}
-                    className="flex w-full items-center gap-1.5 rounded-sm px-1.5 py-1 text-left hover:bg-accent"
+                    className={cn(
+                      "flex w-full items-center gap-2 rounded-md px-1.5 py-[5px] text-left transition-colors",
+                      activa ? "bg-accent" : "hover:bg-accent"
+                    )}
                   >
+                    {/* El badge conserva su ancho natural: estirarlo a toda la
+                        fila lo convierte en una barra de color, no en badge. */}
                     <span
-                      className={cn(
-                        "badge-etapa min-w-0 flex-1",
-                        toneClass(s.tone)
-                      )}
+                      className={cn("badge-etapa max-w-[140px]", toneClass(s.tone))}
                     >
-                      {s.kind === "won" && <Trophy className="h-3 w-3 shrink-0" />}
-                      {s.kind === "lost" && <XCircle className="h-3 w-3 shrink-0" />}
+                      {s.kind === "won" && <Trophy className="h-2.5 w-2.5 shrink-0" />}
+                      {s.kind === "lost" && <XCircle className="h-2.5 w-2.5 shrink-0" />}
                       <span className="truncate">{s.name}</span>
                     </span>
+                    <span className="flex-1" />
                     {activa && (
                       <Check className="h-3 w-3 shrink-0 text-brand" strokeWidth={2.5} />
                     )}

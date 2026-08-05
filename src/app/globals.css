@@ -39,7 +39,7 @@
     --accent2-text: #22635e;
 
     /* Chat: la burbuja propia toma el turquesa tenue */
-    --chat-bg: #f6f6f7;
+    --chat-bg: #f2f2f4;
     --bubble-out: #dbeceb;
     --bubble-out-text: #1d5a55;
 
@@ -115,7 +115,7 @@
     --accent2-tint: #101a1d;
     --accent2-text: #78c2bb;
 
-    --chat-bg: #0d0d10;
+    --chat-bg: #0b0b0e;
     --bubble-out: #16302f;
     --bubble-out-text: #a9d8d3;
 
@@ -167,7 +167,7 @@
       --accent2-tint: #101a1d;
       --accent2-text: #78c2bb;
 
-      --chat-bg: #0d0d10;
+      --chat-bg: #0b0b0e;
       --bubble-out: #16302f;
       --bubble-out-text: #a9d8d3;
 
