@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, Trophy, XCircle } from "lucide-react";
 import type { StageDto } from "@/lib/types";
 import { toneClass } from "@/lib/stage-colors";
 import { cn } from "@/lib/utils";
@@ -34,9 +34,12 @@ export function MoveStageMenu({
         aria-expanded={open}
         className={cn(
           "badge-etapa transition-opacity hover:opacity-80",
+          actual && actual.kind !== "open" && "sin-punto",
           actual ? toneClass(actual.tone) : "tono-gris"
         )}
       >
+        {actual?.kind === "won" && <Trophy className="h-3 w-3 shrink-0" />}
+        {actual?.kind === "lost" && <XCircle className="h-3 w-3 shrink-0" />}
         <span className="max-w-[110px] truncate">
           {actual?.name ?? "Sin etapa"}
         </span>
@@ -62,13 +65,19 @@ export function MoveStageMenu({
                       if (!activa) onMove(s.id);
                       setOpen(false);
                     }}
-                    className="flex w-full items-center gap-1.5 rounded-sm px-1.5 py-1 text-left text-sm hover:bg-accent"
+                    className="flex w-full items-center gap-1.5 rounded-sm px-1.5 py-1 text-left hover:bg-accent"
                   >
                     <span
-                      className={cn("cuadro-etapa shrink-0", toneClass(s.tone))}
-                      aria-hidden
-                    />
-                    <span className="min-w-0 flex-1 truncate">{s.name}</span>
+                      className={cn(
+                        "badge-etapa min-w-0 flex-1",
+                        s.kind !== "open" && "sin-punto",
+                        toneClass(s.tone)
+                      )}
+                    >
+                      {s.kind === "won" && <Trophy className="h-3 w-3 shrink-0" />}
+                      {s.kind === "lost" && <XCircle className="h-3 w-3 shrink-0" />}
+                      <span className="truncate">{s.name}</span>
+                    </span>
                     {activa && (
                       <Check className="h-3 w-3 shrink-0 text-brand" strokeWidth={2.5} />
                     )}

@@ -268,19 +268,19 @@ export function ContactPanel({
                     </button>
                     <button
                       onClick={() => void moveToStage(s.id)}
-                      className="min-w-0 text-left text-md"
+                      className="min-w-0 text-left"
                     >
-                      {/* Solo la etapa actual lleva badge: marca dónde está el
-                          lead. Badgear todas convertiría el stepper en ruido. */}
-                      {current ? (
-                        <span className={cn("badge-etapa", toneClass(s.tone))}>
-                          {s.name}
-                        </span>
-                      ) : (
-                        <span className="text-text-2 hover:text-foreground">
-                          {s.name}
-                        </span>
-                      )}
+                      {/* El nombre de una etapa SIEMPRE va en badge. La actual
+                          se distingue por el anillo, no por ser la única. */}
+                      <span
+                        className={cn(
+                          "badge-etapa transition-opacity",
+                          toneClass(s.tone),
+                          current ? "ring-1 ring-brand" : "opacity-70 hover:opacity-100"
+                        )}
+                      >
+                        {s.name}
+                      </span>
                     </button>
                   </li>
                 );

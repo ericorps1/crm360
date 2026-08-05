@@ -227,33 +227,44 @@ export function StageManager({
 
         {deleting && (
           <div className="mt-4 rounded-md border border-warning-line bg-warning-surface p-3">
-            <p className="text-sm text-warning-ink">
-              &quot;{deleting.name}&quot; tiene tarjetas. Elige a dónde moverlas:
+            <p className="flex flex-wrap items-center gap-1 text-sm text-warning-ink">
+              <span className={cn("badge-etapa", toneClass(deleting.tone))}>
+                {deleting.name}
+              </span>
+              tiene tarjetas. Elige a dónde moverlas:
             </p>
-            <div className="mt-2 flex gap-2">
-              <select
-                value={moveTo}
-                onChange={(e) => setMoveTo(e.target.value)}
-                className="h-9 flex-1 rounded-md border border-input bg-card px-3 text-sm"
-              >
-                <option value="">Etapa destino…</option>
-                {sorted
-                  .filter((s) => s.id !== deleting.id)
-                  .map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.name}
-                    </option>
-                  ))}
-              </select>
-              <Button
-                variant="destructive"
-                size="sm"
-                disabled={!moveTo}
-                onClick={() => void remove(deleting, moveTo)}
-              >
-                Mover y eliminar
-              </Button>
+            {/* Botones y no un <select>: un <option> no admite badge, y el
+                nombre de una etapa siempre se muestra con su color. */}
+            <div className="mt-2 flex flex-wrap gap-1">
+              {sorted
+                .filter((s) => s.id !== deleting.id)
+                .map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    aria-pressed={moveTo === s.id}
+                    onClick={() => setMoveTo(s.id)}
+                    className={cn(
+                      "badge-etapa transition-opacity",
+                      toneClass(s.tone),
+                      moveTo === s.id
+                        ? "ring-1 ring-brand"
+                        : "opacity-70 hover:opacity-100"
+                    )}
+                  >
+                    {s.name}
+                  </button>
+                ))}
             </div>
+            <Button
+              variant="destructive"
+              size="sm"
+              className="mt-2"
+              disabled={!moveTo}
+              onClick={() => void remove(deleting, moveTo)}
+            >
+              Mover y eliminar
+            </Button>
           </div>
         )}
 
