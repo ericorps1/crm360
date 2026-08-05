@@ -34,7 +34,6 @@ export function MoveStageMenu({
         aria-expanded={open}
         className={cn(
           "badge-etapa transition-opacity hover:opacity-80",
-          actual && actual.kind !== "open" && "sin-punto",
           actual ? toneClass(actual.tone) : "tono-gris"
         )}
       >
@@ -70,7 +69,6 @@ export function MoveStageMenu({
                     <span
                       className={cn(
                         "badge-etapa min-w-0 flex-1",
-                        s.kind !== "open" && "sin-punto",
                         toneClass(s.tone)
                       )}
                     >

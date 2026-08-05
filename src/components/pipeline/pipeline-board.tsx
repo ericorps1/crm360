@@ -205,7 +205,6 @@ function StageColumn({
         <span
           className={cn(
             "badge-etapa min-w-0",
-            stage.kind !== "open" && "sin-punto",
             toneClass(stage.tone)
           )}
         >

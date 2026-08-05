@@ -313,6 +313,50 @@ export const kbEntry = pgTable(
  * organización, se editan sin pedirle permiso a nadie y usan variables con
  * nombre: {{nombre}}, {{telefono}}, {{etapa}}.
  */
+/**
+ * Mensaje programado: texto que sale solo en una fecha y hora futuras.
+ *
+ * El disparador es de tipo "pull": un endpoint revisa los vencidos y los
+ * envía. No hay proceso en segundo plano, así que sobrevive a reinicios y
+ * funciona igual en un VPS que en serverless.
+ *
+ * `sendAt` se guarda en UTC; la conversión desde la hora local del operador
+ * ocurre en el navegador al programarlo.
+ */
+export const scheduledMessage = pgTable(
+  "scheduled_message",
+  {
+    id: text("id").primaryKey(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organization.id, { onDelete: "cascade" }),
+    conversationId: text("conversation_id")
+      .notNull()
+      .references(() => conversation.id, { onDelete: "cascade" }),
+    body: text("body").notNull(),
+    sendAt: timestamp("send_at").notNull(),
+    status: text("status", {
+      enum: ["pending", "sent", "failed", "canceled"],
+    })
+      .notNull()
+      .default("pending"),
+    /** Motivo del fallo, para poder explicarlo en la interfaz. */
+    error: text("error"),
+    sentMessageId: text("sent_message_id"),
+    createdBy: text("created_by").references(() => user.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    // El disparador barre por (status, sendAt): este índice es el que evita
+    // recorrer toda la tabla en cada revisión.
+    index("scheduled_pending_idx").on(t.status, t.sendAt),
+    index("scheduled_conversation_idx").on(t.conversationId, t.status),
+  ]
+);
+
 export const quickReply = pgTable(
   "quick_reply",
   {

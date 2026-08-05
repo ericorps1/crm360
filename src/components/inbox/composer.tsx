@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Clock3, Send } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CalendarClock, Clock3, Send } from "lucide-react";
 import type { ConversationDto, TemplateDto } from "@/lib/types";
 import { renderQuickReply, type QuickReplyDto } from "@/lib/quick-replies";
 import { cn } from "@/lib/utils";
 import { formatRemaining } from "./helpers";
+import {
+  SchedulePopover,
+  type ScheduledDto,
+} from "./schedule-popover";
 import { SnippetMenu, type SnippetItem } from "./snippet-menu";
 import { TemplateSender } from "./template-sender";
 
@@ -28,6 +32,8 @@ export function Composer({
   const [quickReplies, setQuickReplies] = useState<QuickReplyDto[]>([]);
   const [query, setQuery] = useState<string | null>(null); // null = menú cerrado
   const [activeIndex, setActiveIndex] = useState(0);
+  const [programando, setProgramando] = useState(false);
+  const [pendientes, setPendientes] = useState<ScheduledDto[]>([]);
   const taRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -50,6 +56,19 @@ export function Composer({
       cancelled = true;
     };
   }, []);
+
+  const recargarProgramados = useCallback(async () => {
+    const res = await fetch(
+      `/api/scheduled?conversationId=${conversation.id}`
+    ).catch(() => null);
+    if (!res?.ok) return;
+    const d = (await res.json()) as { scheduled?: ScheduledDto[] };
+    setPendientes(d.scheduled ?? []);
+  }, [conversation.id]);
+
+  useEffect(() => {
+    void recargarProgramados();
+  }, [recargarProgramados]);
 
   /**
    * Fuera de la ventana de 24 h se ocultan las respuestas rápidas: Meta solo
@@ -204,6 +223,21 @@ export function Composer({
 
   return (
     <div className="relative shrink-0 border-t bg-background px-3 pb-2 pt-2">
+      {programando && (
+        <SchedulePopover
+          conversationId={conversation.id}
+          texto={text}
+          pendientes={pendientes}
+          onProgramado={() => {
+            setText("");
+            setProgramando(false);
+            void recargarProgramados();
+          }}
+          onCancelado={() => void recargarProgramados()}
+          onCerrar={() => setProgramando(false)}
+        />
+      )}
+
       {menuOpen && (
         <SnippetMenu
           items={items}
@@ -256,6 +290,17 @@ export function Composer({
           className="max-h-[120px] w-full resize-none bg-transparent text-md leading-relaxed outline-none placeholder:text-text-3"
         />
         <button
+          onClick={() => setProgramando((v) => !v)}
+          aria-label="Programar envío"
+          title="Programar envío"
+          className={cn(
+            "flex h-7 w-7 shrink-0 items-center justify-center rounded-md border text-text-3 transition-colors hover:bg-accent hover:text-foreground",
+            (programando || pendientes.length > 0) && "border-brand text-brand"
+          )}
+        >
+          <CalendarClock className="h-[15px] w-[15px]" strokeWidth={1.7} />
+        </button>
+        <button
           onClick={() => void submit()}
           disabled={sending || text.trim().length === 0}
           aria-label="Enviar"
@@ -274,6 +319,13 @@ export function Composer({
         ) : (
           <p className="text-2xs text-text-4">
             Enter enviar · Shift+Enter salto · # plantillas
+            {pendientes.length > 0 && (
+              <span className="text-brand">
+                {" "}
+                · {pendientes.length} programado
+                {pendientes.length > 1 ? "s" : ""}
+              </span>
+            )}
           </p>
         )}
         <p className="shrink-0 text-2xs text-text-3">

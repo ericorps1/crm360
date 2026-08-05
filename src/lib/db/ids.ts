@@ -15,6 +15,7 @@ const prefixes = {
   kbEntry: "kb",
   template: "tpl",
   quickReply: "qr",
+  scheduledMessage: "sch",
   testRun: "run",
   testCase: "case",
 } as const;

@@ -238,38 +238,48 @@
     :root:not([data-theme="light"]) .tono-gris { --tono-surface: #26262e; --tono-line: #3a3a46; --tono-ink: #adadb8; }
   }
 
-  /* Badge rectangular de estatus. */
+  /*
+    Badge de estatus.
+
+    Todo se deriva de `--tono-ink` con `color-mix()`: el fondo es esa misma
+    tinta al 13% y el filo al 20%. Un solo color por tono en vez de tres, y
+    fondo y borde no pueden desafinarse entre sí.
+
+    Sin borde duro de 1px ni cuadrito: un filo interior tenue y esquina de 5px
+    se leen actuales; el borde marcado y la esquina de 2px se veían anticuados.
+  */
   .badge-etapa {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    border-radius: 2px;
-    border: 1px solid var(--tono-line);
-    background: var(--tono-surface);
-    color: var(--tono-ink);
-    padding: 2px 6px;
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.3;
-    letter-spacing: 0.01em;
+    gap: 3px;
+    border-radius: 5px;
+    padding: 0 5px;
+    height: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.005em;
     white-space: nowrap;
+    color: var(--tono-ink);
+    background: color-mix(in oklab, var(--tono-ink) 13%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--tono-ink) 20%, transparent);
   }
-  .badge-etapa::before {
+  /* El punto sobra cuando el fondo ya lleva el color; queda como opción. */
+  .badge-etapa::before { content: none; }
+  .badge-etapa.con-punto::before {
     content: "";
-    width: 5px;
-    height: 5px;
-    border-radius: 1px;
-    background: var(--tono-ink);
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: currentColor;
   }
-  /* Variante sin punto, para cuando el badge ya está junto a otro indicador. */
-  .badge-etapa.sin-punto::before { display: none; }
 
   /* Marca rectangular suelta, para listas densas. */
   .cuadro-etapa {
     display: inline-block;
-    width: 3px;
-    height: 12px;
-    border-radius: 1px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
     background: var(--tono-ink);
   }
 

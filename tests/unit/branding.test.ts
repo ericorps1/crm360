@@ -75,10 +75,13 @@ describe("avatares neutros", () => {
 });
 
 describe("badges de estatus", () => {
-  it("son rectangulares, no píldoras", () => {
+  it("son rectangulares y compactos, no píldoras", () => {
     const badge = CSS.slice(CSS.indexOf(".badge-etapa {"), CSS.indexOf(".badge-etapa::before"));
-    expect(badge).toContain("border-radius: 2px");
-    expect(badge).not.toContain("border-radius: 999px");
+    const radio = Number(badge.match(/border-radius: (\d+)px/)![1]);
+    // Rectangular con esquina suave; una píldora sería la mitad del alto o más.
+    expect(radio).toBeGreaterThan(2);
+    expect(radio).toBeLessThan(8);
+    expect(badge).toContain("height: 16px");
   });
 
   it("cada tono existe en claro y en oscuro", () => {
