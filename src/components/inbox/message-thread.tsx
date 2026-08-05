@@ -52,7 +52,7 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
   return (
     <div
       ref={scrollRef}
-      className="flex flex-1 flex-col gap-[3px] overflow-y-auto bg-chat px-[6%] py-5"
+      className="flex flex-1 flex-col gap-[3px] overflow-y-auto bg-chat px-4 py-3"
     >
       {messages.map((m, i) => {
         const prev = messages[i - 1];
@@ -68,7 +68,7 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
           <div key={m.id}>
             {newDay && (
               <div className="my-3 flex justify-center">
-                <span className="rounded-full border bg-background px-3 py-1 text-xs font-semibold text-text-2 shadow-sm">
+                <span className="rounded-[3px] border bg-background px-2 py-0.5 text-2xs font-semibold text-text-2 shadow-sm">
                   {dayLabel(m.createdAt)}
                 </span>
               </div>
@@ -82,7 +82,7 @@ export function MessageThread({ messages }: { messages: MessageDto[] }) {
             >
               <div
                 className={cn(
-                  "max-w-[64%] rounded-lg px-3 pb-1.5 pt-2 text-sm leading-[1.45] shadow-sm",
+                  "max-w-[70%] rounded-md px-2.5 pb-1 pt-1.5 text-sm leading-[1.4] shadow-sm",
                   out
                     ? "border border-brand-soft bg-bubble-out text-bubble-out-text"
                     : "bg-background",

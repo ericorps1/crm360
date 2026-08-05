@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -29,17 +22,14 @@ import { StageManager } from "./stage-manager";
 
 /**
  * Tablero kanban del embudo: todas las etapas como columnas, arrastre entre
- * ellas. Es la vista principal. La vista de conversación (PipelineSplit) es
- * opcional y se abre al hacer clic en una tarjeta o con el conmutador.
+ * ellas. Hacer clic en una tarjeta abre su conversación en la Bandeja.
  *
  * Igual que el kanban original, pero densificado: columnas de 224px (antes
  * 256) y la tarjeta compacta de dos líneas en lugar de la de p-3 con sombra.
  */
 export function PipelineBoard({
-  viewSwitcher,
   onOpenLead,
 }: {
-  viewSwitcher?: ReactNode;
   onOpenLead: (lead: BoardLead) => void;
 }) {
   const [stages, setStages] = useState<StageDto[]>([]);
@@ -90,8 +80,7 @@ export function PipelineBoard({
     };
   }, []);
 
-  // Única llamada a useEvents en esta vista (la Split monta la suya; nunca
-  // están montadas a la vez, así que sigue habiendo un solo EventSource).
+  // Única llamada a useEvents en esta pantalla: un solo EventSource.
   useEvents({
     onMessageNew: scheduleRefetch,
     onConversationUpdated: scheduleRefetch,
@@ -145,12 +134,9 @@ export function PipelineBoard({
     <div className="flex h-full flex-col">
       <header className="flex shrink-0 items-center justify-between gap-2 border-b px-3 py-1.5">
         <h2 className="text-md font-semibold">Embudo</h2>
-        <div className="flex items-center gap-1.5">
-          {viewSwitcher}
-          <Button variant="outline" size="sm" onClick={() => setManaging(true)}>
-            <Settings2 /> Etapas
-          </Button>
-        </div>
+        <Button variant="outline" size="sm" onClick={() => setManaging(true)}>
+          <Settings2 /> Etapas
+        </Button>
       </header>
 
       <div className="flex-1 overflow-x-auto p-2">

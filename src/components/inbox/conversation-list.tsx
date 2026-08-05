@@ -76,18 +76,18 @@ export function ConversationList({
 
   return (
     <div className="flex h-full flex-col">
-      <header className="border-b px-3 pb-2 pt-3">
-        <div className="mb-3 flex items-baseline gap-2">
-          <h2 className="text-xl font-[650] tracking-tight">Bandeja</h2>
-          <span className="text-sm text-text-3">{conversations.length}</span>
+      <header className="border-b px-3 pb-2 pt-2.5">
+        <div className="mb-2 flex items-baseline gap-2">
+          <h2 className="text-lg font-[650] tracking-tight">Bandeja</h2>
+          <span className="text-xs text-text-3">{conversations.length}</span>
         </div>
-        <div className="flex items-center gap-2 rounded-md border bg-secondary px-3 py-[7px] transition-colors focus-within:border-brand focus-within:bg-background focus-within:ring-[3px] focus-within:ring-brand-soft">
-          <Search className="h-4 w-4 shrink-0 text-text-3" strokeWidth={1.7} />
+        <div className="flex items-center gap-2 rounded-md border bg-secondary px-2.5 py-1 transition-colors focus-within:border-brand focus-within:bg-background focus-within:ring-[3px] focus-within:ring-brand-soft">
+          <Search className="h-3.5 w-3.5 shrink-0 text-text-3" strokeWidth={1.7} />
           <input
             placeholder="Buscar conversación…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full bg-transparent text-md outline-none placeholder:text-text-3"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-text-3"
           />
         </div>
       </header>
@@ -103,7 +103,7 @@ export function ConversationList({
             key={f.id}
             onClick={() => setFilter(f.id)}
             className={cn(
-              "flex items-center gap-1.5 rounded-full border px-3 py-[5px] text-sm font-medium transition-colors",
+              "flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium transition-colors",
               filter === f.id
                 ? "border-brand bg-brand text-white"
                 : "bg-background text-text-2 hover:bg-accent"
@@ -112,7 +112,7 @@ export function ConversationList({
             {f.label}
             <span
               className={cn(
-                "rounded-full px-1.5 text-xs",
+                "rounded-full px-1 text-2xs",
                 filter === f.id ? "bg-white/20" : "bg-secondary text-text-3"
               )}
             >
@@ -149,9 +149,9 @@ export function ConversationList({
                     )}
                   >
                     <span className="relative shrink-0">
-                      <ContactAvatar name={c.contact.name} seed={c.contact.id} size="lg" />
+                      <ContactAvatar name={c.contact.name} seed={c.contact.id} size="md" />
                       {c.windowOpen && (
-                        <span className="absolute bottom-0 right-0 h-[9px] w-[9px] rounded-full border-2 border-background bg-success" />
+                        <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full border-2 border-background bg-success" />
                       )}
                     </span>
                     <span className="min-w-0 flex-1">
@@ -166,7 +166,7 @@ export function ConversationList({
                         </span>
                         <span
                           className={cn(
-                            "shrink-0 text-xs",
+                            "shrink-0 text-2xs",
                             unread ? "font-semibold text-brand" : "text-text-3"
                           )}
                         >
@@ -176,7 +176,7 @@ export function ConversationList({
                       <span className="mt-0.5 flex items-center justify-between gap-2">
                         <span
                           className={cn(
-                            "truncate text-md",
+                            "truncate text-xs",
                             unread ? "font-medium text-text-2" : "text-text-3"
                           )}
                         >
@@ -188,14 +188,14 @@ export function ConversationList({
                           </span>
                         )}
                       </span>
-                      <span className="mt-1.5 flex items-center gap-1.5">
+                      <span className="mt-1 flex items-center gap-1">
                         {c.stageName && (
                           <span className={cn("badge-etapa", toneClass(c.stageTone))}>
                             {c.stageName}
                           </span>
                         )}
                         {c.handoffAt && (
-                          <span className="inline-flex items-center gap-1 rounded-full border border-warning-line bg-warning-surface px-2 py-0.5 text-xs text-warning-ink">
+                          <span className="inline-flex items-center gap-1 rounded-[3px] border border-warning-line bg-warning-surface px-1.5 py-px text-2xs text-warning-ink">
                             <UserRound className="h-3 w-3" strokeWidth={1.7} />
                             Atención humana
                           </span>
