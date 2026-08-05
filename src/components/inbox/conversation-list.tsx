@@ -144,62 +144,68 @@ export function ConversationList({
                   <button
                     onClick={() => onSelect(c.id)}
                     className={cn(
-                      "flex w-full items-start gap-2 px-3 py-[var(--row-py)] text-left transition-colors",
+                      "flex w-full items-center gap-2 px-2.5 py-1.5 text-left transition-colors",
                       active ? "bg-[var(--bg-active)]" : "hover:bg-subtle"
                     )}
                   >
                     <span className="relative shrink-0">
-                      <ContactAvatar name={c.contact.name} seed={c.contact.id} size="md" />
+                      <ContactAvatar name={c.contact.name} seed={c.contact.id} size="sm" />
                       {c.windowOpen && (
                         <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full border-2 border-background bg-success" />
                       )}
                     </span>
+                    {/* Dos líneas, no tres: nombre + etapa arriba, extracto +
+                        hora abajo. La etapa va a la derecha del nombre para
+                        que todos los badges queden alineados en columna. */}
                     <span className="min-w-0 flex-1">
-                      <span className="flex items-center justify-between gap-2">
+                      <span className="flex items-center justify-between gap-1.5">
                         <span
                           className={cn(
-                            "truncate text-sm",
+                            "truncate text-xs",
                             unread ? "font-[680]" : "font-semibold"
                           )}
                         >
                           {c.contact.name}
                         </span>
-                        <span
-                          className={cn(
-                            "shrink-0 text-2xs",
-                            unread ? "font-semibold text-brand" : "text-text-3"
+                        <span className="flex shrink-0 items-center gap-1">
+                          {c.handoffAt && (
+                            <UserRound
+                              className="h-3 w-3 text-warning-ink"
+                              strokeWidth={2}
+                              aria-label="Atención humana"
+                            />
                           )}
-                        >
-                          {formatTime(c.lastMessageAt)}
+                          {c.stageName && (
+                            <span className={cn("badge-etapa", toneClass(c.stageTone))}>
+                              {c.stageName}
+                            </span>
+                          )}
                         </span>
                       </span>
-                      <span className="mt-0.5 flex items-center justify-between gap-2">
+                      <span className="mt-px flex items-center justify-between gap-1.5">
                         <span
                           className={cn(
-                            "truncate text-xs",
+                            "truncate text-2xs",
                             unread ? "font-medium text-text-2" : "text-text-3"
                           )}
                         >
                           {previewText(c.preview)}
                         </span>
-                        {unread && (
-                          <span className="flex h-4 min-w-4 shrink-0 items-center justify-center rounded-[3px] bg-brand px-1 text-2xs font-semibold text-white">
-                            {c.unreadCount}
+                        <span className="flex shrink-0 items-center gap-1">
+                          <span
+                            className={cn(
+                              "text-2xs tabular-nums",
+                              unread ? "font-semibold text-brand" : "text-text-3"
+                            )}
+                          >
+                            {formatTime(c.lastMessageAt)}
                           </span>
-                        )}
-                      </span>
-                      <span className="mt-1 flex items-center gap-1">
-                        {c.stageName && (
-                          <span className={cn("badge-etapa", toneClass(c.stageTone))}>
-                            {c.stageName}
-                          </span>
-                        )}
-                        {c.handoffAt && (
-                          <span className="inline-flex items-center gap-1 rounded-[3px] border border-warning-line bg-warning-surface px-1.5 py-px text-2xs text-warning-ink">
-                            <UserRound className="h-3 w-3" strokeWidth={1.7} />
-                            Atención humana
-                          </span>
-                        )}
+                          {unread && (
+                            <span className="flex h-[15px] min-w-[15px] items-center justify-center rounded-[3px] bg-brand px-1 text-2xs font-semibold tabular-nums text-white">
+                              {c.unreadCount}
+                            </span>
+                          )}
+                        </span>
                       </span>
                     </span>
                   </button>

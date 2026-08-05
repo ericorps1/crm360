@@ -202,34 +202,40 @@
   embudo se lee de frío a cálido a verde, y las anclas (ganado / perdido) tienen
   color fijo. Todos los tonos son apagados para no competir con la marca.
 */
-@layer components {
-  .tono-violeta { --tono-surface: #efecf9; --tono-line: #d5cdee; --tono-ink: #55439a; }
-  .tono-turquesa { --tono-surface: #e6f2f1; --tono-line: #b6d8d4; --tono-ink: #226762; }
-  .tono-azul { --tono-surface: #eaf0f8; --tono-line: #c2d3e9; --tono-ink: #2f5680; }
-  .tono-verde { --tono-surface: #ecf4ee; --tono-line: #c1dbc9; --tono-ink: #2f6444; }
-  .tono-ambar { --tono-surface: #f9f4e9; --tono-line: #e6d6b3; --tono-ink: #7a5e2c; }
-  .tono-rosa { --tono-surface: #f9ecf0; --tono-line: #e9c6d1; --tono-ink: #8a4159; }
-  .tono-arena { --tono-surface: #f4f0e9; --tono-line: #dcd2c0; --tono-ink: #6d5c42; }
-  .tono-gris { --tono-surface: #f0f0f1; --tono-line: #d9d9dd; --tono-ink: #4f4f57; }
+/*
+  ⚠️ FUERA de @layer components a propósito.
 
-  :root[data-theme="dark"] .tono-violeta { --tono-surface: #1c1826; --tono-line: #2f2843; --tono-ink: #a698d8; }
-  :root[data-theme="dark"] .tono-turquesa { --tono-surface: #10201f; --tono-line: #1d3634; --tono-ink: #6dbab3; }
-  :root[data-theme="dark"] .tono-azul { --tono-surface: #121a26; --tono-line: #1f2c3f; --tono-ink: #82a8d6; }
-  :root[data-theme="dark"] .tono-verde { --tono-surface: #111f16; --tono-line: #1e3527; --tono-ink: #76b78d; }
-  :root[data-theme="dark"] .tono-ambar { --tono-surface: #211b11; --tono-line: #382e1c; --tono-ink: #c8a468; }
-  :root[data-theme="dark"] .tono-rosa { --tono-surface: #22151a; --tono-line: #3a242c; --tono-ink: #d195aa; }
-  :root[data-theme="dark"] .tono-arena { --tono-surface: #1e1a13; --tono-line: #332c20; --tono-ink: #c0ab8a; }
-  :root[data-theme="dark"] .tono-gris { --tono-surface: #1a1a1e; --tono-line: #2b2b32; --tono-ink: #9c9ca6; }
+  `toneClass()` arma el nombre con plantilla —`tono-${key}`— así que Tailwind
+  nunca ve estas clases en el código y las purgaría del layer, dejando los
+  badges sin color. Como CSS plano quedan siempre en el bundle.
+*/
+.tono-violeta { --tono-surface: #e5deff; --tono-line: #bfaef5; --tono-ink: #4a2f9e; }
+  .tono-turquesa { --tono-surface: #cdeeea; --tono-line: #8bd2c9; --tono-ink: #125e57; }
+  .tono-azul { --tono-surface: #d8e6fb; --tono-line: #a5c4ef; --tono-ink: #1d4f88; }
+  .tono-verde { --tono-surface: #d5eddd; --tono-line: #a2d4b5; --tono-ink: #1c6238; }
+  .tono-ambar { --tono-surface: #fbeccb; --tono-line: #e8c684; --tono-ink: #7a5310; }
+  .tono-rosa { --tono-surface: #fbdde8; --tono-line: #f0aec6; --tono-ink: #8f2c53; }
+  .tono-arena { --tono-surface: #f0e6d3; --tono-line: #d9c39c; --tono-ink: #6b5426; }
+  .tono-gris { --tono-surface: #e6e6ea; --tono-line: #c8c8d0; --tono-ink: #43434e; }
+
+  :root[data-theme="dark"] .tono-violeta { --tono-surface: #2a2350; --tono-line: #443a78; --tono-ink: #c3b5ff; }
+  :root[data-theme="dark"] .tono-turquesa { --tono-surface: #123834; --tono-line: #1d5850; --tono-ink: #7fded1; }
+  :root[data-theme="dark"] .tono-azul { --tono-surface: #152a45; --tono-line: #254670; --tono-ink: #9cc6f5; }
+  :root[data-theme="dark"] .tono-verde { --tono-surface: #14301f; --tono-line: #215239; --tono-ink: #8ad4a5; }
+  :root[data-theme="dark"] .tono-ambar { --tono-surface: #2e2412; --tono-line: #4e3d1d; --tono-ink: #e0b878; }
+  :root[data-theme="dark"] .tono-rosa { --tono-surface: #2f1a24; --tono-line: #4f2d3c; --tono-ink: #e8a6bf; }
+  :root[data-theme="dark"] .tono-arena { --tono-surface: #2a2317; --tono-line: #463a26; --tono-ink: #cfb894; }
+  :root[data-theme="dark"] .tono-gris { --tono-surface: #26262e; --tono-line: #3a3a46; --tono-ink: #adadb8; }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .tono-violeta { --tono-surface: #1c1826; --tono-line: #2f2843; --tono-ink: #a698d8; }
-    :root:not([data-theme="light"]) .tono-turquesa { --tono-surface: #10201f; --tono-line: #1d3634; --tono-ink: #6dbab3; }
-    :root:not([data-theme="light"]) .tono-azul { --tono-surface: #121a26; --tono-line: #1f2c3f; --tono-ink: #82a8d6; }
-    :root:not([data-theme="light"]) .tono-verde { --tono-surface: #111f16; --tono-line: #1e3527; --tono-ink: #76b78d; }
-    :root:not([data-theme="light"]) .tono-ambar { --tono-surface: #211b11; --tono-line: #382e1c; --tono-ink: #c8a468; }
-    :root:not([data-theme="light"]) .tono-rosa { --tono-surface: #22151a; --tono-line: #3a242c; --tono-ink: #d195aa; }
-    :root:not([data-theme="light"]) .tono-arena { --tono-surface: #1e1a13; --tono-line: #332c20; --tono-ink: #c0ab8a; }
-    :root:not([data-theme="light"]) .tono-gris { --tono-surface: #1a1a1e; --tono-line: #2b2b32; --tono-ink: #9c9ca6; }
+    :root:not([data-theme="light"]) .tono-violeta { --tono-surface: #2a2350; --tono-line: #443a78; --tono-ink: #c3b5ff; }
+    :root:not([data-theme="light"]) .tono-turquesa { --tono-surface: #123834; --tono-line: #1d5850; --tono-ink: #7fded1; }
+    :root:not([data-theme="light"]) .tono-azul { --tono-surface: #152a45; --tono-line: #254670; --tono-ink: #9cc6f5; }
+    :root:not([data-theme="light"]) .tono-verde { --tono-surface: #14301f; --tono-line: #215239; --tono-ink: #8ad4a5; }
+    :root:not([data-theme="light"]) .tono-ambar { --tono-surface: #2e2412; --tono-line: #4e3d1d; --tono-ink: #e0b878; }
+    :root:not([data-theme="light"]) .tono-rosa { --tono-surface: #2f1a24; --tono-line: #4f2d3c; --tono-ink: #e8a6bf; }
+    :root:not([data-theme="light"]) .tono-arena { --tono-surface: #2a2317; --tono-line: #463a26; --tono-ink: #cfb894; }
+    :root:not([data-theme="light"]) .tono-gris { --tono-surface: #26262e; --tono-line: #3a3a46; --tono-ink: #adadb8; }
   }
 
   /* Badge rectangular de estatus. */
@@ -266,7 +272,6 @@
     border-radius: 1px;
     background: var(--tono-ink);
   }
-}
 
 @layer base {
   * {

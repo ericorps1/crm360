@@ -6,6 +6,19 @@ import { STAGE_TONES, toneClass, toneKey } from "@/lib/stage-colors";
 const raiz = process.cwd();
 const leer = (ruta: string) => readFileSync(join(raiz, ruta), "utf8");
 
+/** Contraste WCAG entre dos hex. */
+function contraste(a: string, b: string): number {
+  const lum = (h: string) => {
+    const c = [1, 3, 5]
+      .map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+      .map((s) => (s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4)));
+    return 0.2126 * c[0]! + 0.7152 * c[1]! + 0.0722 * c[2]!;
+  };
+  const x = lum(a) + 0.05;
+  const y = lum(b) + 0.05;
+  return x > y ? x / y : y / x;
+}
+
 /**
  * El nombre de una etapa NUNCA se pinta como texto suelto: siempre va dentro
  * de un `.badge-etapa` con el tono de la etapa. Estos casos congelan los siete
@@ -114,6 +127,39 @@ describe("el catálogo de tonos", () => {
     for (const clave of Object.keys(STAGE_TONES)) {
       expect(css).toContain(`.tono-${clave} {`);
       expect(css).toContain(`:root[data-theme="dark"] .tono-${clave} {`);
+    }
+  });
+
+  it("los tonos viven FUERA de @layer components, o Tailwind los purga", () => {
+    // `toneClass()` arma el nombre con plantilla, así que Tailwind nunca ve
+    // estas clases en el código. Dentro de un @layer las elimina del bundle y
+    // los badges salen sin color; fuera, siempre se emiten.
+    const css = leer("src/app/globals.css");
+    // La directiva real, no la mención en un comentario.
+    const inicioLayer = css.indexOf("@layer components {");
+    if (inicioLayer === -1) return; // no hay layer de componentes: nada que revisar
+    const finLayer = css.indexOf("\n}", inicioLayer);
+    const dentro = css.slice(inicioLayer, finLayer);
+    for (const clave of Object.keys(STAGE_TONES)) {
+      expect(dentro, `.tono-${clave} está dentro de @layer y se purgaría`).not.toContain(
+        `.tono-${clave} {`
+      );
+    }
+    expect(dentro).not.toContain(".badge-etapa {");
+  });
+
+  it("los tonos claros se distinguen del fondo blanco", () => {
+    // El bug original: superficies a 1.12–1.16 de contraste, indistinguibles
+    // del blanco. El badge existía pero no se veía.
+    const css = leer("src/app/globals.css");
+    for (const clave of Object.keys(STAGE_TONES)) {
+      const i = css.indexOf(`.tono-${clave} { --tono-surface:`);
+      expect(i, `sin regla clara para ${clave}`).toBeGreaterThan(-1);
+      const superficie = css.slice(i, i + 120).match(/#[0-9a-f]{6}/)![0];
+      expect(
+        contraste(superficie, "#ffffff"),
+        `${clave}: la superficie no se distingue del blanco`
+      ).toBeGreaterThan(1.16);
     }
   });
 });
