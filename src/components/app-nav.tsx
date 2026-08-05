@@ -73,7 +73,7 @@ export function AppNav({
   });
 
   return (
-    <aside className="vidrio flex w-52 shrink-0 flex-col border-y-0 border-l-0 px-2 pb-2.5 pt-3">
+    <aside className="vidrio flex w-52 shrink-0 flex-col border-y-0 border-l-0 border-r-border-strong px-2 pb-2.5 pt-3">
       {/* Marca */}
       <div className="mb-3 flex items-center gap-2 px-1.5">
         <span

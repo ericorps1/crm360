@@ -41,8 +41,10 @@ export function LeadCard({
   return (
     <div
       className={cn(
-        "w-full cursor-grab select-none rounded-xl px-2 py-1.5 text-left",
-        selected ? "bg-brand-soft shadow-sm" : "estado bg-card/70",
+        "w-full cursor-grab select-none rounded-md border px-2 py-1.5 text-left",
+        selected
+          ? "border-brand-soft bg-brand-soft shadow-sm"
+          : "estado border-border bg-card/70",
         overlay && "rotate-2 border-border shadow-pop"
       )}
     >

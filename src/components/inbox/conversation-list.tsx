@@ -103,7 +103,7 @@ export function ConversationList({
             key={f.id}
             onClick={() => setFilter(f.id)}
             className={cn(
-              "flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-xs font-medium transition-colors",
+              "flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-medium transition-colors",
               filter === f.id
                 ? "border-brand bg-brand text-white"
                 : "bg-background text-text-2 hover:bg-accent"
@@ -112,7 +112,7 @@ export function ConversationList({
             {f.label}
             <span
               className={cn(
-                "rounded-full px-1 text-2xs",
+                "rounded-sm px-1 text-2xs",
                 filter === f.id ? "bg-white/20" : "bg-secondary text-text-3"
               )}
             >
@@ -141,8 +141,10 @@ export function ConversationList({
                   <button
                     onClick={() => onSelect(c.id)}
                     className={cn(
-                      "flex w-full items-center gap-2 rounded-xl px-2 py-1.5 text-left",
-                      active ? "bg-brand-soft shadow-sm" : "estado"
+                      "flex w-full items-center gap-2 rounded-md border px-2 py-1.5 text-left",
+                      active
+                        ? "border-brand-soft bg-brand-soft shadow-sm"
+                        : "estado border-transparent"
                     )}
                   >
                     <span className="relative shrink-0">

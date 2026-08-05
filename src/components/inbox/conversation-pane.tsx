@@ -43,7 +43,7 @@ export function ConversationPane({
 
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-1 flex-col">
-      <header className="vidrio-fuerte flex shrink-0 items-center justify-between gap-2 px-3 py-2">
+      <header className="vidrio-fuerte flex shrink-0 items-center justify-between gap-2 border-b px-3 py-2">
         <div className="flex min-w-0 items-center gap-2">
           <ContactAvatar
             name={conversation.contact.name}
