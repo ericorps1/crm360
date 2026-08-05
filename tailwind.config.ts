@@ -18,6 +18,14 @@ const config: Config = {
         background: "var(--bg)",
         foreground: "var(--text)",
         subtle: "var(--bg-subtle)",
+        // Superficies tonales de Material 3: la elevación se expresa con
+        // tono, no solo con sombra.
+        surface: {
+          DEFAULT: "var(--surface)",
+          1: "var(--surface-1)",
+          2: "var(--surface-2)",
+          3: "var(--surface-3)",
+        },
         primary: {
           DEFAULT: "var(--accent)",
           foreground: "#ffffff",

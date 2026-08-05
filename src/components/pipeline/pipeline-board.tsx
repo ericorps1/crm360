@@ -132,7 +132,7 @@ export function PipelineBoard({
 
   return (
     <div className="flex h-full flex-col">
-      <header className="flex shrink-0 items-center justify-between gap-2 border-b px-3 py-1.5">
+      <header className="vidrio-fuerte flex shrink-0 items-center justify-between gap-2 px-3 py-1.5">
         <h2 className="text-md font-semibold">Embudo</h2>
         <Button variant="outline" size="sm" onClick={() => setManaging(true)}>
           <Settings2 /> Etapas
@@ -196,7 +196,7 @@ function StageColumn({
     <div
       ref={setNodeRef}
       className={cn(
-        "flex h-full w-56 shrink-0 flex-col rounded-md border bg-subtle transition-shadow",
+        "vidrio flex h-full w-56 shrink-0 flex-col rounded-2xl transition-shadow",
         isOver && "ring-2 ring-primary/60"
       )}
     >

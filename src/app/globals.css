@@ -62,14 +62,38 @@
     --danger-line: #fdbdbe;
     --danger-ink: #ce2c31;
 
-    --radius-sm: 4px;
-    --radius: 6px;
-    --radius-lg: 10px;
+
+    /* ── Material 3 · superficies tonales ────────────────────────
+       M3 expresa elevación con TONO, no con sombra: cada nivel sube
+       un escalón de la escala neutra. */
+    --surface: #fdfcfd;
+    --surface-1: #faf9fb;
+    --surface-2: #f2eff3;
+    --surface-3: #eae7ec;
+
+    /* Vidrio: fondo translúcido + desenfoque. Necesita el degradado
+       ambiental de body detrás, o se ve idéntico a un fondo opaco. */
+    --glass: rgba(255, 255, 255, 0.72);
+    --glass-strong: rgba(255, 255, 255, 0.86);
+    --glass-line: rgba(255, 255, 255, 0.7);
+    --blur: 20px;
+
+    /* Capa de estado M3: el hover es un velo del acento, no un gris. */
+    --state-hover: #4400ee0f;
+    --state-press: #4300ff1b;
+
+    /* Manchas del fondo ambiental (ver body). */
+    --aura-1: rgba(110, 86, 207, 0.10);
+    --aura-2: rgba(18, 165, 148, 0.09);
+
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 16px;
     /* Dos capas: un contacto de 1px que asienta el elemento y una difusión
        amplia y suave. Una sola sombra dura es lo que se ve anticuado. */
-    --shadow-sm: 0 1px 2px -1px rgba(15, 15, 20, 0.08), 0 1px 1px rgba(15, 15, 20, 0.04);
-    --shadow-md: 0 1px 2px rgba(15, 15, 20, 0.06), 0 8px 24px -8px rgba(15, 15, 20, 0.12);
-    --shadow-pop: 0 1px 3px rgba(15, 15, 20, 0.08), 0 16px 40px -12px rgba(15, 15, 20, 0.2);
+    --shadow-sm: 0 1px 3px rgba(30, 20, 60, 0.07), 0 1px 2px rgba(30, 20, 60, 0.04);
+    --shadow-md: 0 4px 12px rgba(30, 20, 60, 0.09), 0 2px 4px rgba(30, 20, 60, 0.05);
+    --shadow-pop: 0 12px 32px rgba(30, 20, 60, 0.16), 0 4px 10px rgba(30, 20, 60, 0.08);
 
     /* ── Densidad ──────────────────────────────────────────────
        Único lugar donde se define qué tan compacta es la app.
@@ -137,6 +161,20 @@
     --danger-ink: #ff9592;
 
     /* En oscuro la sombra sola no separa: se apoya en un filo luminoso. */
+
+    --surface: #121113;
+    --surface-1: #1a191b;
+    --surface-2: #232225;
+    --surface-3: #2b292d;
+    --glass: rgba(28, 26, 32, 0.66);
+    --glass-strong: rgba(28, 26, 32, 0.84);
+    --glass-line: rgba(255, 255, 255, 0.08);
+    --blur: 20px;
+    --state-hover: #8354fe36;
+    --state-press: #7d51fd50;
+    --aura-1: rgba(131, 84, 254, 0.14);
+    --aura-2: rgba(11, 216, 182, 0.08);
+
     --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.5);
     --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 24px -8px rgba(0, 0, 0, 0.7);
     --shadow-pop: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
@@ -188,6 +226,20 @@
       --danger-line: #72232d;
       --danger-ink: #ff9592;
 
+
+      --surface: #121113;
+      --surface-1: #1a191b;
+      --surface-2: #232225;
+      --surface-3: #2b292d;
+      --glass: rgba(28, 26, 32, 0.66);
+      --glass-strong: rgba(28, 26, 32, 0.84);
+      --glass-line: rgba(255, 255, 255, 0.08);
+      --blur: 20px;
+      --state-hover: #8354fe36;
+      --state-press: #7d51fd50;
+      --aura-1: rgba(131, 84, 254, 0.14);
+      --aura-2: rgba(11, 216, 182, 0.08);
+
       --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.5);
       --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 24px -8px rgba(0, 0, 0, 0.7);
       --shadow-pop: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
@@ -205,6 +257,34 @@
   embudo se lee de frío a cálido a verde, y las anclas (ganado / perdido) tienen
   color fijo. Todos los tonos son apagados para no competir con la marca.
 */
+/*
+  Material 3 + vidrio.
+
+  `.vidrio` es un panel translúcido con desenfoque; funciona solo porque el
+  body tiene un degradado detrás. `.estado` aplica la capa de estado de M3:
+  el hover es un velo del color de marca sobre el elemento, no un gris.
+*/
+.vidrio {
+  background: var(--glass);
+  backdrop-filter: blur(var(--blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+  border: 1px solid var(--glass-line);
+}
+.vidrio-fuerte {
+  background: var(--glass-strong);
+  backdrop-filter: blur(var(--blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(180%);
+}
+/* Capa de estado M3: velo de marca en hover, más intenso al presionar. */
+.estado { position: relative; transition: background-color 140ms ease; }
+.estado:hover { background-color: var(--state-hover); }
+.estado:active { background-color: var(--state-press); }
+
+/* Navegador sin soporte de desenfoque: se cae a opaco, nunca a ilegible. */
+@supports not (backdrop-filter: blur(1px)) {
+  .vidrio, .vidrio-fuerte { background: var(--surface); }
+}
+
 /*
   ⚠️ FUERA de @layer components a propósito.
 
@@ -310,8 +390,19 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
     letter-spacing: -0.01em;
+    /*
+      Fondo ambiental: dos manchas de luz difusa en los colores de marca.
+      No es decoración — es el requisito del vidrio. Sin algo con color
+      detrás, `backdrop-filter: blur()` no tiene qué desenfocar y un panel
+      translúcido se ve exactamente igual que uno opaco.
+    */
+    background-color: var(--surface-1);
+    background-image:
+      radial-gradient(60rem 40rem at 8% -6%, var(--aura-1), transparent 60%),
+      radial-gradient(52rem 36rem at 102% 12%, var(--aura-2), transparent 62%);
+    background-attachment: fixed;
   }
   ::-webkit-scrollbar {
     width: 6px;

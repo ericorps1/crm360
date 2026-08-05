@@ -204,7 +204,7 @@ export function Composer({
 
   if (!conversation.windowOpen) {
     return (
-      <div className="shrink-0 border-t bg-background px-3 py-2.5">
+      <div className="vidrio-fuerte shrink-0 px-3 py-2.5">
         <div className="mb-2 flex items-start gap-2 rounded-md border border-warning-line bg-warning-surface p-2 text-sm text-warning-ink">
           <Clock3 className="mt-px h-[15px] w-[15px] shrink-0" strokeWidth={1.7} />
           <div>
@@ -222,7 +222,7 @@ export function Composer({
   }
 
   return (
-    <div className="relative shrink-0 border-t bg-background px-3 pb-2 pt-2">
+    <div className="vidrio-fuerte relative shrink-0 px-3 pb-2 pt-2">
       {programando && (
         <SchedulePopover
           conversationId={conversation.id}
@@ -248,7 +248,7 @@ export function Composer({
         />
       )}
 
-      <div className="flex items-end gap-2 rounded-md border bg-background px-2.5 py-1.5 transition-shadow focus-within:border-brand focus-within:ring-[3px] focus-within:ring-brand-soft">
+      <div className="flex items-end gap-2 rounded-2xl border bg-background px-3 py-2 shadow-sm transition-shadow focus-within:border-brand focus-within:ring-[3px] focus-within:ring-brand-soft">
         <textarea
           ref={taRef}
           placeholder="Escribe una respuesta…  (# para plantillas)"

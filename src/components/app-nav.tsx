@@ -73,7 +73,7 @@ export function AppNav({
   });
 
   return (
-    <aside className="flex w-52 shrink-0 flex-col border-r bg-subtle px-2 pb-2.5 pt-3">
+    <aside className="vidrio flex w-52 shrink-0 flex-col border-y-0 border-l-0 px-2 pb-2.5 pt-3">
       {/* Marca */}
       <div className="mb-3 flex items-center gap-2 px-1.5">
         <span
@@ -129,7 +129,7 @@ export function AppNav({
         <ThemeToggle compact />
       </div>
 
-      <div className="mt-1 flex items-center gap-2 rounded-sm px-2 py-1.5 hover:bg-accent">
+      <div className="estado mt-1 flex items-center gap-2 rounded-lg px-2 py-1.5">
         <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-brand-soft text-2xs font-semibold text-brand-text">
           {initials(userName)}
         </span>
@@ -174,8 +174,8 @@ function NavItem({
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-2 rounded-sm px-2 py-[5px] text-sm font-medium transition-colors",
-        active ? "bg-brand-tint font-semibold text-brand-text" : "text-text-2 hover:bg-accent"
+        "estado flex items-center gap-2 rounded-lg px-2 py-[5px] text-sm font-medium",
+        active && "bg-brand-soft font-semibold text-brand-text"
       )}
     >
       <Icon

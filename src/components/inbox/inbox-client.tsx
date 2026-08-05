@@ -100,7 +100,7 @@ export function InboxClient() {
 
   return (
     <div className="flex h-full">
-      <section className="w-[280px] shrink-0 overflow-hidden border-r bg-subtle">
+      <section className="vidrio w-[280px] shrink-0 overflow-hidden border-y-0 border-l-0">
         <ConversationList
           conversations={ws.conversations}
           selectedId={selectedId}
@@ -141,8 +141,8 @@ export function InboxClient() {
 
       <section
         className={cn(
-          "shrink-0 overflow-hidden border-l transition-[width] duration-[220ms]",
-          panelOpen && selected ? "w-[280px]" : "w-0 border-l-0"
+          "shrink-0 overflow-hidden transition-[width] duration-[220ms]",
+          panelOpen && selected ? "vidrio w-[280px] border-y-0 border-r-0" : "w-0"
         )}
       >
         {selected && (
