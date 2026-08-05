@@ -14,53 +14,53 @@
   :root {
     /* ── Neutros claros: gris cálido-neutro, sin sesgo de color ───── */
     --bg: #ffffff;
-    --bg-subtle: #fafafa;
-    --bg-panel: #f5f5f6;
-    --bg-hover: #f0f0f1;
-    --text: #171718;
-    --text-2: #55555c;
-    --text-3: #86868f;
-    --text-4: #adadb5;
-    --border: #eaeaec;
-    --border-strong: #dcdce0;
+    --bg-subtle: #faf9fb;
+    --bg-panel: #f2eff3;
+    --bg-hover: #eae7ec;
+    --text: #211f26;
+    --text-2: #65636d;
+    --text-3: #84828e;
+    --text-4: #8e8c99;
+    --border: #e3dfe6;
+    --border-strong: #d0cdd7;
 
     /* ── Marca: violeta primario + turquesa tenue secundario ─────── */
-    --accent: #6250b5;
-    --accent-hover: #52429b;
-    --accent-soft: #e4e0f5;
-    --accent-tint: #f6f4fc;
-    --accent-text: #4b3d8f;
+    --accent: #6e56cf;
+    --accent-hover: #654dc4;
+    --accent-soft: #e1d9ff;
+    --accent-tint: #f4f0fe;
+    --accent-text: #6550b9;
     --bg-active: var(--accent-tint);
 
-    --accent2: #2a817a;
-    --accent2-hover: #226b65;
-    --accent2-soft: #dbeceb;
-    --accent2-tint: #f1f8f7;
-    --accent2-text: #22635e;
+    --accent2: #12a594;
+    --accent2-hover: #0d9b8a;
+    --accent2-soft: #b8eae0;
+    --accent2-tint: #e0f8f3;
+    --accent2-text: #008573;
 
     /* Chat: la burbuja propia toma el turquesa tenue */
-    --chat-bg: #f2f2f4;
-    --bubble-out: #dbeceb;
-    --bubble-out-text: #1d5a55;
+    --chat-bg: #f2eff3;
+    --bubble-out: #ccf3ea;
+    --bubble-out-text: #0d3d38;
 
     /* Avatares: neutros, nunca de color (gris en claro, negro en oscuro) */
-    --avatar-bg: #6c6c75;
+    --avatar-bg: #65636d;
     --avatar-fg: #ffffff;
     --avatar-ring: transparent;
 
     /* Estado */
-    --success: #3b948c;
-    --warning: #b0803c;
-    --danger: #a94a50;
-    --success-surface: #eef6f2;
-    --success-line: #d5e7de;
-    --success-ink: #35664f;
-    --warning-surface: #faf6ee;
-    --warning-line: #ebe0cb;
-    --warning-ink: #85683a;
-    --danger-surface: #faf0f0;
-    --danger-line: #ecd2d2;
-    --danger-ink: #9d4a4a;
+    --success: #29a383;
+    --warning: #ffc53d;
+    --danger: #e5484d;
+    --success-surface: #e6f7ed;
+    --success-line: #acdec8;
+    --success-ink: #208368;
+    --warning-surface: #fff7c2;
+    --warning-line: #f3d673;
+    --warning-ink: #ab6400;
+    --danger-surface: #feebec;
+    --danger-line: #fdbdbe;
+    --danger-ink: #ce2c31;
 
     --radius-sm: 4px;
     --radius: 6px;
@@ -92,49 +92,49 @@
     color solo aparece en la marca.
   */
   :root[data-theme="dark"] {
-    --bg: #0a0a0c;
-    --bg-subtle: #101013;
-    --bg-panel: #16161a;
-    --bg-hover: #1e1e23;
-    --text: #f4f4f6;
-    --text-2: #a8a8b2;
-    --text-3: #7a7a85;
-    --text-4: #56565f;
-    --border: #202026;
-    --border-strong: #2e2e36;
+    --bg: #121113;
+    --bg-subtle: #1a191b;
+    --bg-panel: #232225;
+    --bg-hover: #2b292d;
+    --text: #eeeef0;
+    --text-2: #b5b2bc;
+    --text-3: #7c7a85;
+    --text-4: #6f6d78;
+    --border: #323035;
+    --border-strong: #49474e;
 
-    --accent: #8d7fc9;
-    --accent-hover: #a294d6;
-    --accent-soft: #241f33;
-    --accent-tint: #17151d;
-    --accent-text: #b3a7de;
+    --accent: #6e56cf;
+    --accent-hover: #7d66d9;
+    --accent-soft: #3c2e69;
+    --accent-tint: #291f43;
+    --accent-text: #baa7ff;
 
-    --accent2: #4fa39c;
-    --accent2-hover: #62b4ad;
-    --accent2-soft: #14262a;
-    --accent2-tint: #101a1d;
-    --accent2-text: #78c2bb;
+    --accent2: #12a594;
+    --accent2-hover: #0eb39e;
+    --accent2-soft: #084843;
+    --accent2-tint: #0d2d2a;
+    --accent2-text: #0bd8b6;
 
-    --chat-bg: #0b0b0e;
-    --bubble-out: #16302f;
-    --bubble-out-text: #a9d8d3;
+    --chat-bg: #121113;
+    --bubble-out: #023b37;
+    --bubble-out-text: #adf0dd;
 
-    --avatar-bg: #1c1c21;
-    --avatar-fg: #d2d2da;
-    --avatar-ring: #2e2e36;
+    --avatar-bg: #323035;
+    --avatar-fg: #eeeef0;
+    --avatar-ring: #3c393f;
 
-    --success: #55b3a8;
-    --warning: #cfa257;
-    --danger: #d1706f;
-    --success-surface: #10221e;
-    --success-line: #1e3833;
-    --success-ink: #74c4b5;
-    --warning-surface: #221c11;
-    --warning-line: #3b311e;
-    --warning-ink: #d3ac6d;
-    --danger-surface: #241414;
-    --danger-line: #3f2525;
-    --danger-ink: #dd8f8e;
+    --success: #29a383;
+    --warning: #ffc53d;
+    --danger: #e5484d;
+    --success-surface: #0f2e22;
+    --success-line: #1b5745;
+    --success-ink: #1fd8a4;
+    --warning-surface: #302008;
+    --warning-line: #5c3d05;
+    --warning-ink: #ffca16;
+    --danger-surface: #3b1219;
+    --danger-line: #72232d;
+    --danger-ink: #ff9592;
 
     /* En oscuro la sombra sola no separa: se apoya en un filo luminoso. */
     --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -144,49 +144,49 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0a0a0c;
-      --bg-subtle: #101013;
-      --bg-panel: #16161a;
-      --bg-hover: #1e1e23;
-      --text: #f4f4f6;
-      --text-2: #a8a8b2;
-      --text-3: #7a7a85;
-      --text-4: #56565f;
-      --border: #202026;
-      --border-strong: #2e2e36;
+      --bg: #121113;
+      --bg-subtle: #1a191b;
+      --bg-panel: #232225;
+      --bg-hover: #2b292d;
+      --text: #eeeef0;
+      --text-2: #b5b2bc;
+      --text-3: #7c7a85;
+      --text-4: #6f6d78;
+      --border: #323035;
+      --border-strong: #49474e;
 
-      --accent: #8d7fc9;
-      --accent-hover: #a294d6;
-      --accent-soft: #241f33;
-      --accent-tint: #17151d;
-      --accent-text: #b3a7de;
+      --accent: #6e56cf;
+      --accent-hover: #7d66d9;
+      --accent-soft: #3c2e69;
+      --accent-tint: #291f43;
+      --accent-text: #baa7ff;
 
-      --accent2: #4fa39c;
-      --accent2-hover: #62b4ad;
-      --accent2-soft: #14262a;
-      --accent2-tint: #101a1d;
-      --accent2-text: #78c2bb;
+      --accent2: #12a594;
+      --accent2-hover: #0eb39e;
+      --accent2-soft: #084843;
+      --accent2-tint: #0d2d2a;
+      --accent2-text: #0bd8b6;
 
-      --chat-bg: #0b0b0e;
-      --bubble-out: #16302f;
-      --bubble-out-text: #a9d8d3;
+      --chat-bg: #121113;
+      --bubble-out: #023b37;
+      --bubble-out-text: #adf0dd;
 
-      --avatar-bg: #1c1c21;
-      --avatar-fg: #d2d2da;
-      --avatar-ring: #2e2e36;
+      --avatar-bg: #323035;
+      --avatar-fg: #eeeef0;
+      --avatar-ring: #3c393f;
 
-      --success: #55b3a8;
-      --warning: #cfa257;
-      --danger: #d1706f;
-      --success-surface: #10221e;
-      --success-line: #1e3833;
-      --success-ink: #74c4b5;
-      --warning-surface: #221c11;
-      --warning-line: #3b311e;
-      --warning-ink: #d3ac6d;
-      --danger-surface: #241414;
-      --danger-line: #3f2525;
-      --danger-ink: #dd8f8e;
+      --success: #29a383;
+      --warning: #ffc53d;
+      --danger: #e5484d;
+      --success-surface: #0f2e22;
+      --success-line: #1b5745;
+      --success-ink: #1fd8a4;
+      --warning-surface: #302008;
+      --warning-line: #5c3d05;
+      --warning-ink: #ffca16;
+      --danger-surface: #3b1219;
+      --danger-line: #72232d;
+      --danger-ink: #ff9592;
 
       --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.5);
       --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 24px -8px rgba(0, 0, 0, 0.7);
@@ -212,33 +212,33 @@
   nunca ve estas clases en el código y las purgaría del layer, dejando los
   badges sin color. Como CSS plano quedan siempre en el bundle.
 */
-.tono-violeta { --tono-surface: #e5deff; --tono-line: #bfaef5; --tono-ink: #4a2f9e; }
-  .tono-turquesa { --tono-surface: #cdeeea; --tono-line: #8bd2c9; --tono-ink: #125e57; }
-  .tono-azul { --tono-surface: #d8e6fb; --tono-line: #a5c4ef; --tono-ink: #1d4f88; }
-  .tono-verde { --tono-surface: #d5eddd; --tono-line: #a2d4b5; --tono-ink: #1c6238; }
-  .tono-ambar { --tono-surface: #fbeccb; --tono-line: #e8c684; --tono-ink: #7a5310; }
-  .tono-rosa { --tono-surface: #fbdde8; --tono-line: #f0aec6; --tono-ink: #8f2c53; }
-  .tono-arena { --tono-surface: #f0e6d3; --tono-line: #d9c39c; --tono-ink: #6b5426; }
-  .tono-gris { --tono-surface: #e6e6ea; --tono-line: #c8c8d0; --tono-ink: #43434e; }
+.tono-violeta { --tono-ink: #6550b9; }
+  .tono-turquesa { --tono-ink: #008573; }
+  .tono-azul { --tono-ink: #0d74ce; }
+  .tono-verde { --tono-ink: #208368; }
+  .tono-ambar { --tono-ink: #ab6400; }
+  .tono-rosa { --tono-ink: #c2298a; }
+  .tono-arena { --tono-ink: #7d5e54; }
+  .tono-gris { --tono-ink: #65636d; }
 
-  :root[data-theme="dark"] .tono-violeta { --tono-surface: #2a2350; --tono-line: #443a78; --tono-ink: #c3b5ff; }
-  :root[data-theme="dark"] .tono-turquesa { --tono-surface: #123834; --tono-line: #1d5850; --tono-ink: #7fded1; }
-  :root[data-theme="dark"] .tono-azul { --tono-surface: #152a45; --tono-line: #254670; --tono-ink: #9cc6f5; }
-  :root[data-theme="dark"] .tono-verde { --tono-surface: #14301f; --tono-line: #215239; --tono-ink: #8ad4a5; }
-  :root[data-theme="dark"] .tono-ambar { --tono-surface: #2e2412; --tono-line: #4e3d1d; --tono-ink: #e0b878; }
-  :root[data-theme="dark"] .tono-rosa { --tono-surface: #2f1a24; --tono-line: #4f2d3c; --tono-ink: #e8a6bf; }
-  :root[data-theme="dark"] .tono-arena { --tono-surface: #2a2317; --tono-line: #463a26; --tono-ink: #cfb894; }
-  :root[data-theme="dark"] .tono-gris { --tono-surface: #26262e; --tono-line: #3a3a46; --tono-ink: #adadb8; }
+  :root[data-theme="dark"] .tono-violeta { --tono-ink: #baa7ff; }
+  :root[data-theme="dark"] .tono-turquesa { --tono-ink: #0bd8b6; }
+  :root[data-theme="dark"] .tono-azul { --tono-ink: #70b8ff; }
+  :root[data-theme="dark"] .tono-verde { --tono-ink: #1fd8a4; }
+  :root[data-theme="dark"] .tono-ambar { --tono-ink: #ffca16; }
+  :root[data-theme="dark"] .tono-rosa { --tono-ink: #ff8dcc; }
+  :root[data-theme="dark"] .tono-arena { --tono-ink: #d4b3a5; }
+  :root[data-theme="dark"] .tono-gris { --tono-ink: #b5b2bc; }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .tono-violeta { --tono-surface: #2a2350; --tono-line: #443a78; --tono-ink: #c3b5ff; }
-    :root:not([data-theme="light"]) .tono-turquesa { --tono-surface: #123834; --tono-line: #1d5850; --tono-ink: #7fded1; }
-    :root:not([data-theme="light"]) .tono-azul { --tono-surface: #152a45; --tono-line: #254670; --tono-ink: #9cc6f5; }
-    :root:not([data-theme="light"]) .tono-verde { --tono-surface: #14301f; --tono-line: #215239; --tono-ink: #8ad4a5; }
-    :root:not([data-theme="light"]) .tono-ambar { --tono-surface: #2e2412; --tono-line: #4e3d1d; --tono-ink: #e0b878; }
-    :root:not([data-theme="light"]) .tono-rosa { --tono-surface: #2f1a24; --tono-line: #4f2d3c; --tono-ink: #e8a6bf; }
-    :root:not([data-theme="light"]) .tono-arena { --tono-surface: #2a2317; --tono-line: #463a26; --tono-ink: #cfb894; }
-    :root:not([data-theme="light"]) .tono-gris { --tono-surface: #26262e; --tono-line: #3a3a46; --tono-ink: #adadb8; }
+    :root:not([data-theme="light"]) .tono-violeta { --tono-ink: #baa7ff; }
+    :root:not([data-theme="light"]) .tono-turquesa { --tono-ink: #0bd8b6; }
+    :root:not([data-theme="light"]) .tono-azul { --tono-ink: #70b8ff; }
+    :root:not([data-theme="light"]) .tono-verde { --tono-ink: #1fd8a4; }
+    :root:not([data-theme="light"]) .tono-ambar { --tono-ink: #ffca16; }
+    :root:not([data-theme="light"]) .tono-rosa { --tono-ink: #ff8dcc; }
+    :root:not([data-theme="light"]) .tono-arena { --tono-ink: #d4b3a5; }
+    :root:not([data-theme="light"]) .tono-gris { --tono-ink: #b5b2bc; }
   }
 
   /*

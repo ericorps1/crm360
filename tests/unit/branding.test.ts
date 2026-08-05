@@ -6,6 +6,19 @@ import { STAGE_TONES, suggestTone, toneClass, toneKey } from "@/lib/stage-colors
 
 const CSS = readFileSync(join(process.cwd(), "src/app/globals.css"), "utf8");
 
+/** Luminancia relativa (WCAG). */
+function luminancia(h: string): number {
+  const c = [1, 3, 5]
+    .map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+    .map((s) => (s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4)));
+  return 0.2126 * c[0]! + 0.7152 * c[1]! + 0.0722 * c[2]!;
+}
+
+/** Lienzo del modo oscuro, leído del CSS para no fijarlo aquí. */
+const FONDO_OSCURO = CSS.slice(CSS.indexOf(':root[data-theme="dark"] {')).match(
+  /--bg: (#[0-9a-f]{6})/
+)![1]!;
+
 /** Contraste WCAG entre dos hex. */
 function contraste(a: string, b: string): number {
   const lum = (h: string) => {
@@ -48,29 +61,42 @@ describe("contraste de la marca", () => {
   });
 });
 
-describe("modo oscuro en negro por capas", () => {
-  it("define los cuatro niveles de elevación y suben de luminosidad", () => {
-    const niveles = ["#0a0a0c", "#101013", "#16161a", "#1e1e23"];
-    for (const n of niveles) expect(CSS).toContain(n);
-    // Cada capa debe ser más clara que la anterior para leerse como elevación.
-    const lum = (h: string) => parseInt(h.slice(1, 3), 16);
+describe("modo oscuro por capas", () => {
+  /** Valor de un token dentro del bloque :root[data-theme="dark"]. */
+  function tokenOscuro(nombre: string): string {
+    const bloque = CSS.slice(CSS.indexOf(':root[data-theme="dark"] {'));
+    return bloque.match(new RegExp(`${nombre}: (#[0-9a-f]{6})`))![1]!;
+  }
+
+  it("los cuatro niveles de elevación suben de luminosidad en orden", () => {
+    // Se leen del CSS, no se escriben aquí: así el test sobrevive a un cambio
+    // de paleta y sigue verificando lo que importa, que es la progresión.
+    const niveles = ["--bg", "--bg-subtle", "--bg-panel", "--bg-hover"].map(tokenOscuro);
     for (let i = 1; i < niveles.length; i++) {
-      expect(lum(niveles[i]!)).toBeGreaterThan(lum(niveles[i - 1]!));
+      expect(
+        luminancia(niveles[i]!),
+        `${niveles[i]} no es más claro que ${niveles[i - 1]}`
+      ).toBeGreaterThan(luminancia(niveles[i - 1]!));
     }
   });
 
   it("el texto principal contrasta de sobra con el lienzo", () => {
-    expect(contraste("#f4f4f6", DARK_BG)).toBeGreaterThanOrEqual(7);
+    expect(contraste(tokenOscuro("--text"), tokenOscuro("--bg"))).toBeGreaterThanOrEqual(7);
   });
 });
 
 describe("avatares neutros", () => {
-  it("son gris en claro y negro en oscuro, nunca de color", () => {
-    expect(CSS).toContain("--avatar-bg: #6c6c75");
-    expect(CSS).toContain("--avatar-bg: #1c1c21");
-    // El texto debe leerse en ambos.
-    expect(contraste("#6c6c75", "#ffffff")).toBeGreaterThanOrEqual(4.5);
-    expect(contraste("#1c1c21", "#d2d2da")).toBeGreaterThanOrEqual(4.5);
+  it("el texto se lee sobre el fondo del avatar, en los dos temas", () => {
+    const claro = CSS.slice(CSS.indexOf(":root {"), CSS.indexOf(':root[data-theme="dark"] {'));
+    const oscuro = CSS.slice(CSS.indexOf(':root[data-theme="dark"] {'));
+    for (const [bloque, tema] of [
+      [claro, "claro"],
+      [oscuro, "oscuro"],
+    ] as const) {
+      const bg = bloque.match(/--avatar-bg: (#[0-9a-f]{6})/)![1]!;
+      const fg = bloque.match(/--avatar-fg: (#[0-9a-f]{6})/)![1]!;
+      expect(contraste(bg, fg), `avatar en ${tema}`).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });
 
@@ -91,8 +117,8 @@ describe("badges de estatus", () => {
     // el fondo de color, el nombre de la etapa se vuelve ilegible.
     // Anclado a inicio de línea: sin esto también casaría dentro de las reglas
     // oscuras, que llevan el mismo `.tono-x {` precedido del selector :root.
-    const claro = /^\s*\.tono-(\w+) \{ --tono-surface: #[0-9a-f]{6}; --tono-line: #[0-9a-f]{6}; --tono-ink: (#[0-9a-f]{6});/gm;
-    const oscuro = /:root\[data-theme="dark"\] \.tono-(\w+) \{ --tono-surface: #[0-9a-f]{6}; --tono-line: #[0-9a-f]{6}; --tono-ink: (#[0-9a-f]{6});/gm;
+    const claro = /^\s*\.tono-(\w+) \{ --tono-ink: (#[0-9a-f]{6}); \}/gm;
+    const oscuro = /:root\[data-theme="dark"\] \.tono-(\w+) \{ --tono-ink: (#[0-9a-f]{6}); \}/gm;
 
     let n = 0;
     for (const m of CSS.matchAll(claro)) {
@@ -100,7 +126,7 @@ describe("badges de estatus", () => {
       n++;
     }
     for (const m of CSS.matchAll(oscuro)) {
-      expect(contraste(m[2]!, "#0a0a0c"), `${m[1]} en oscuro`).toBeGreaterThanOrEqual(4.5);
+      expect(contraste(m[2]!, FONDO_OSCURO), `${m[1]} en oscuro`).toBeGreaterThanOrEqual(4.5);
     }
     expect(n, "no se encontraron tonos claros").toBe(8);
   });

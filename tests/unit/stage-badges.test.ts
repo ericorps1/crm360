@@ -148,18 +148,18 @@ describe("el catálogo de tonos", () => {
     expect(dentro).not.toContain(".badge-etapa {");
   });
 
-  it("los tonos claros se distinguen del fondo blanco", () => {
-    // El bug original: superficies a 1.12–1.16 de contraste, indistinguibles
-    // del blanco. El badge existía pero no se veía.
+  it("el texto blanco se lee sobre cada tono claro", () => {
     const css = leer("src/app/globals.css");
     for (const clave of Object.keys(STAGE_TONES)) {
-      const i = css.indexOf(`.tono-${clave} { --tono-surface:`);
+      const i = css.indexOf(`.tono-${clave} { --tono-ink:`);
       expect(i, `sin regla clara para ${clave}`).toBeGreaterThan(-1);
-      const superficie = css.slice(i, i + 120).match(/#[0-9a-f]{6}/)![0];
+      const tinta = css.slice(i, i + 80).match(/#[0-9a-f]{6}/)![0];
+      // El badge es sólido con texto blanco encima: la tinta tiene que
+      // aguantarlo. Es la misma garantía que da el paso 11 de Radix.
       expect(
-        contraste(superficie, "#ffffff"),
-        `${clave}: la superficie no se distingue del blanco`
-      ).toBeGreaterThan(1.16);
+        contraste(tinta, "#ffffff"),
+        `${clave}: el texto blanco no se lee sobre este tono`
+      ).toBeGreaterThanOrEqual(4.5);
     }
   });
 });

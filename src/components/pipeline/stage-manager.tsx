@@ -37,7 +37,10 @@ function TonePicker({
           "flex h-8 w-8 items-center justify-center rounded-md border transition-transform hover:scale-105",
           toneClass(stage.tone)
         )}
-        style={{ background: "var(--tono-surface)", borderColor: "var(--tono-line)" }}
+        style={{
+          background: "color-mix(in oklab, var(--tono-ink) 14%, transparent)",
+          borderColor: "color-mix(in oklab, var(--tono-ink) 30%, transparent)",
+        }}
       >
         <span className="cuadro-etapa" />
       </button>
@@ -63,8 +66,8 @@ function TonePicker({
                     activo && "ring-2 ring-offset-1 ring-offset-card"
                   )}
                   style={{
-                    background: "var(--tono-surface)",
-                    borderColor: "var(--tono-line)",
+                    background: "color-mix(in oklab, var(--tono-ink) 14%, transparent)",
+                    borderColor: "color-mix(in oklab, var(--tono-ink) 30%, transparent)",
                     ...(activo ? { boxShadow: "inset 0 0 0 1px var(--tono-ink)" } : {}),
                   }}
                 >
