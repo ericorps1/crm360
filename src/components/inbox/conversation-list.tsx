@@ -201,7 +201,7 @@ export function ConversationList({
                             {formatTime(c.lastMessageAt)}
                           </span>
                           {unread && (
-                            <span className="flex h-[15px] min-w-[15px] items-center justify-center rounded-[3px] bg-brand px-1 text-2xs font-semibold tabular-nums text-white">
+                            <span className="pastilla bg-brand text-white">
                               {c.unreadCount}
                             </span>
                           )}

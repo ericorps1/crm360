@@ -75,13 +75,34 @@ describe("avatares neutros", () => {
 });
 
 describe("badges de estatus", () => {
-  it("son rectangulares y compactos, no píldoras", () => {
+  it("son cápsulas sólidas y compactas", () => {
     const badge = CSS.slice(CSS.indexOf(".badge-etapa {"), CSS.indexOf(".badge-etapa::before"));
-    const radio = Number(badge.match(/border-radius: (\d+)px/)![1]);
-    // Rectangular con esquina suave; una píldora sería la mitad del alto o más.
-    expect(radio).toBeGreaterThan(2);
-    expect(radio).toBeLessThan(8);
+    // Cápsula: el radio supera el alto, así que las esquinas son semicírculos.
+    expect(badge).toContain("border-radius: 999px");
     expect(badge).toContain("height: 16px");
+    // El fondo es la tinta plena de la etapa, no una mezcla.
+    expect(badge).toContain("background: var(--tono-ink)");
+    // Sin borde: un sólido con borde encima es lo que se veía anticuado.
+    expect(badge).not.toMatch(/^\s*border:/m);
+  });
+
+  it("el texto invertido se lee sobre cada tono, en los dos temas", () => {
+    // Un badge sólido vive o muere por esto: si el texto no contrasta contra
+    // el fondo de color, el nombre de la etapa se vuelve ilegible.
+    // Anclado a inicio de línea: sin esto también casaría dentro de las reglas
+    // oscuras, que llevan el mismo `.tono-x {` precedido del selector :root.
+    const claro = /^\s*\.tono-(\w+) \{ --tono-surface: #[0-9a-f]{6}; --tono-line: #[0-9a-f]{6}; --tono-ink: (#[0-9a-f]{6});/gm;
+    const oscuro = /:root\[data-theme="dark"\] \.tono-(\w+) \{ --tono-surface: #[0-9a-f]{6}; --tono-line: #[0-9a-f]{6}; --tono-ink: (#[0-9a-f]{6});/gm;
+
+    let n = 0;
+    for (const m of CSS.matchAll(claro)) {
+      expect(contraste(m[2]!, "#ffffff"), `${m[1]} en claro`).toBeGreaterThanOrEqual(4.5);
+      n++;
+    }
+    for (const m of CSS.matchAll(oscuro)) {
+      expect(contraste(m[2]!, "#0a0a0c"), `${m[1]} en oscuro`).toBeGreaterThanOrEqual(4.5);
+    }
+    expect(n, "no se encontraron tonos claros").toBe(8);
   });
 
   it("cada tono existe en claro y en oscuro", () => {

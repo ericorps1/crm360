@@ -186,7 +186,7 @@ function NavItem({
       {badge > 0 && (
         <span
           className={cn(
-            "flex h-4 min-w-4 items-center justify-center rounded-[3px] px-1 text-2xs font-semibold tabular-nums",
+            "pastilla",
             active ? "bg-brand text-white" : "bg-border-strong text-text-2"
           )}
         >

@@ -84,7 +84,7 @@ export function LeadCard({
                 : "Sin conversación"}
             </span>
             {noLeidos > 0 && (
-              <span className="flex h-[15px] min-w-[15px] shrink-0 items-center justify-center rounded-[3px] bg-brand px-1 text-2xs font-semibold tabular-nums text-white">
+              <span className="pastilla shrink-0 bg-brand text-white">
                 {noLeidos}
               </span>
             )}

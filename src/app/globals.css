@@ -65,9 +65,11 @@
     --radius-sm: 4px;
     --radius: 6px;
     --radius-lg: 10px;
-    --shadow-sm: 0 1px 2px rgba(15, 15, 20, 0.05);
-    --shadow-md: 0 6px 20px -6px rgba(15, 15, 20, 0.13);
-    --shadow-pop: 0 12px 32px -8px rgba(15, 15, 20, 0.22);
+    /* Dos capas: un contacto de 1px que asienta el elemento y una difusión
+       amplia y suave. Una sola sombra dura es lo que se ve anticuado. */
+    --shadow-sm: 0 1px 2px -1px rgba(15, 15, 20, 0.08), 0 1px 1px rgba(15, 15, 20, 0.04);
+    --shadow-md: 0 1px 2px rgba(15, 15, 20, 0.06), 0 8px 24px -8px rgba(15, 15, 20, 0.12);
+    --shadow-pop: 0 1px 3px rgba(15, 15, 20, 0.08), 0 16px 40px -12px rgba(15, 15, 20, 0.2);
 
     /* ── Densidad ──────────────────────────────────────────────
        Único lugar donde se define qué tan compacta es la app.
@@ -134,9 +136,10 @@
     --danger-line: #3f2525;
     --danger-ink: #dd8f8e;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
-    --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.75);
-    --shadow-pop: 0 16px 40px -10px rgba(0, 0, 0, 0.85);
+    /* En oscuro la sombra sola no separa: se apoya en un filo luminoso. */
+    --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+    --shadow-pop: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -185,9 +188,9 @@
       --danger-line: #3f2525;
       --danger-ink: #dd8f8e;
 
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
-      --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.75);
-      --shadow-pop: 0 16px 40px -10px rgba(0, 0, 0, 0.85);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 1px 2px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+      --shadow-pop: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 40px -12px rgba(0, 0, 0, 0.8);
     }
   }
 }
@@ -239,32 +242,35 @@
   }
 
   /*
-    Badge de estatus.
+    Badge de estatus: cápsula sólida.
 
-    Todo se deriva de `--tono-ink` con `color-mix()`: el fondo es esa misma
-    tinta al 13% y el filo al 20%. Un solo color por tono en vez de tres, y
-    fondo y borde no pueden desafinarse entre sí.
+    El fondo es la tinta plena de la etapa y el texto va invertido —blanco en
+    claro, casi negro en oscuro—. Ese contraste es lo que lo hace legible de
+    reojo en una lista larga; el peor caso de la paleta queda en 6.8:1.
 
-    Sin borde duro de 1px ni cuadrito: un filo interior tenue y esquina de 5px
-    se leen actuales; el borde marcado y la esquina de 2px se veían anticuados.
+    Un solo color por tono (`--tono-ink`) define todo. Sin borde: un badge
+    sólido con borde encima es lo que se veía anticuado.
   */
   .badge-etapa {
     display: inline-flex;
     align-items: center;
-    gap: 3px;
-    border-radius: 5px;
-    padding: 0 5px;
+    gap: 4px;
     height: 16px;
+    padding: 0 7px;
+    border-radius: 999px;
     font-size: 10px;
     font-weight: 600;
     line-height: 1;
-    letter-spacing: -0.005em;
+    letter-spacing: 0.005em;
     white-space: nowrap;
-    color: var(--tono-ink);
-    background: color-mix(in oklab, var(--tono-ink) 13%, transparent);
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--tono-ink) 20%, transparent);
+    background: var(--tono-ink);
+    color: #ffffff;
   }
-  /* El punto sobra cuando el fondo ya lleva el color; queda como opción. */
+  /* En oscuro la tinta es clara, así que el texto se invierte. */
+  :root[data-theme="dark"] .badge-etapa { color: #0a0a0c; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .badge-etapa { color: #0a0a0c; }
+  }
   .badge-etapa::before { content: none; }
   .badge-etapa.con-punto::before {
     content: "";
@@ -272,6 +278,7 @@
     height: 4px;
     border-radius: 999px;
     background: currentColor;
+    opacity: 0.75;
   }
 
   /* Marca rectangular suelta, para listas densas. */
@@ -283,6 +290,21 @@
     background: var(--tono-ink);
   }
 
+  /* Contador compacto (no leídos, totales). Cápsula, nunca rectángulo. */
+  .pastilla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 5px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
 @layer base {
   * {
     @apply border-border;
@@ -292,12 +314,15 @@
     letter-spacing: -0.01em;
   }
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background: var(--border-strong);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-4);
   }
   ::-webkit-scrollbar-track {
     background: transparent;
